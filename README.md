@@ -1,6 +1,8 @@
 # 📚 Smart Study Planner
 
-A comprehensive JavaFX productivity application designed to help students manage their academic workload effectively.
+Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasiswa mengelola beban kerja akademik mereka secara efektif.
+
+(Screenshoot tmpilan)
 
 ![Java](https://img.shields.io/badge/Java-17+-orange.svg)
 ![JavaFX](https://img.shields.io/badge/JavaFX-17.0.2-blue.svg)
@@ -9,10 +11,10 @@ A comprehensive JavaFX productivity application designed to help students manage
 ## ✨ Features
 
 ### 🎯 Smart Task Management
-- **Three Task Types**: Assignments, Exams, and Projects
-- **Intelligent Priority System**: Automatic urgency calculation
-- **Dependency Tracking**: Link related tasks
-- **Status Monitoring**: Track progress from TODO to completion
+- **Tiga Jenis Tugas**: Assignments (Tugas), Exams (Ujian), and Projects(Proyek)
+- **Sistem Prioritas Cerdas**: Kalkulasi urgensi otomatis
+- **Pelacakan Dependensi**: Hubungkan tugas yang terkait
+- **Monitoring Status**: Lacak progres dari TODO hingga selesai
 
 ### 📊 Dashboard
 - Real-time statistics display
@@ -180,19 +182,6 @@ Flashcards use the SuperMemo-2 algorithm:
 - Ease factor adjusts based on performance
 - Failed cards reset to 1-day interval
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see below for details.
 
 ## 🙏 Acknowledgments
 
@@ -202,10 +191,8 @@ This project is licensed under the MIT License - see below for details.
 
 ## 📧 Contact
 
-Your Name - [@yourhandle](https://twitter.com/yourhandle)
+Nayyara - [@yourhandle](https://twitter.com/yourhandle)
 
-Project Link: [https://github.com/YOUR_USERNAME/smart-study-planner](https://github.com/YOUR_USERNAME/smart-study-planner)
+Project Link: [https://github.com/HiSpyWare/smart-study-planner](https://github.com/HiSpyWare/smart-study-planner)
 
 ---
-
-**Made with ❤️ for students everywhere**

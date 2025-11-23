@@ -1,0 +1,294 @@
+package smartStudyPlanner.resources;
+
+* Catppuccin Mocha Color Scheme */
+/* Main application styles */
+
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-background-color: #1e1e2e;
+}
+
+/* Scrollbar styling */
+.scroll-bar {
+    -fx-background-color: #2a2a3e;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #45475a;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #585b70;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Button styling */
+.button {
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-padding: 8px 16px;
+}
+
+.button:hover {
+    -fx-opacity: 0.9;
+}
+
+.button:pressed {
+    -fx-opacity: 0.8;
+}
+
+/* TextField and TextArea */
+.text-field, .text-area {
+    -fx-background-color: #313244;
+    -fx-text-fill: #cdd6f4;
+    -fx-prompt-text-fill: #6c7086;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #89b4fa;
+    -fx-border-width: 2px;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: #313244;
+    -fx-background-radius: 8px;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #313244;
+    -fx-text-fill: #cdd6f4;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #313244;
+    -fx-border-color: #45475a;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #45475a;
+}
+
+/* Spinner */
+.spinner {
+    -fx-background-color: #313244;
+    -fx-background-radius: 8px;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #45475a;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #585b70;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #313244;
+    -fx-control-inner-background: #313244;
+    -fx-background-radius: 10px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #45475a;
+}
+
+.table-view .column-header {
+    -fx-background-color: #45475a;
+    -fx-text-fill: #cdd6f4;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #cdd6f4;
+    -fx-border-color: transparent;
+    -fx-padding: 10px;
+}
+
+.table-row-cell {
+    -fx-background-color: #313244;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #2a2a3e;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #45475a;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #89b4fa;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #1e1e2e;
+}
+
+/* CheckBox */
+.check-box {
+    -fx-text-fill: #cdd6f4;
+}
+
+.check-box .box {
+    -fx-background-color: #313244;
+    -fx-border-color: #585b70;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #89b4fa;
+    -fx-border-color: #89b4fa;
+}
+
+.check-box .mark {
+    -fx-background-color: #1e1e2e;
+}
+
+/* ProgressBar */
+.progress-bar {
+    -fx-background-color: #313244;
+    -fx-background-radius: 15px;
+}
+
+.progress-bar .track {
+    -fx-background-color: #313244;
+    -fx-background-radius: 15px;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #a6e3a1;
+    -fx-background-radius: 15px;
+    -fx-padding: 0.5em;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-background-color: #313244;
+    -fx-background-radius: 8px;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup {
+    -fx-background-color: #313244;
+    -fx-border-color: #45475a;
+}
+
+.date-picker-popup .day-cell {
+    -fx-background-color: #313244;
+    -fx-text-fill: #cdd6f4;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #45475a;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: #89b4fa;
+    -fx-text-fill: #1e1e2e;
+}
+
+/* Dialog */
+.dialog-pane {
+    -fx-background-color: #1e1e2e;
+}
+
+.dialog-pane .content {
+    -fx-background-color: #1e1e2e;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #313244;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: #cdd6f4;
+}
+
+/* Tooltip */
+.tooltip {
+    -fx-background-color: #313244;
+    -fx-text-fill: #cdd6f4;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+}
+
+/* Alert */
+.alert {
+    -fx-background-color: #1e1e2e;
+}
+
+.alert .header-panel {
+    -fx-background-color: #313244;
+}
+
+.alert .content {
+    -fx-background-color: #1e1e2e;
+}
+
+/* Custom card styling */
+.card {
+    -fx-background-color: #313244;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 3);
+}
+
+/* Priority colors */
+.priority-urgent {
+    -fx-background-color: #f38ba8;
+}
+
+.priority-high {
+    -fx-background-color: #fab387;
+}
+
+.priority-medium {
+    -fx-background-color: #f9e2af;
+}
+
+.priority-low {
+    -fx-background-color: #a6e3a1;
+}
+
+/* Status colors */
+.status-completed {
+    -fx-text-fill: #a6e3a1;
+}
+
+.status-in-progress {
+    -fx-text-fill: #89b4fa;
+}
+
+.status-overdue {
+    -fx-text-fill: #f38ba8;
+}
+
+.status-todo {
+    -fx-text-fill: #cdd6f4;
+}

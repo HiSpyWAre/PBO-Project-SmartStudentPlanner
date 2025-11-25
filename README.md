@@ -17,18 +17,18 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 - **Monitoring Status**: Lacak progres dari TODO hingga selesai
 
 ### 📊 Dashboard
-- Real-time statistics display
-- Streak tracking for daily productivity
-- XP and leveling system
-- Most urgent tasks view
-- Weekly productivity chart
+- Tampilan statistik real-time
+- Pelacakan streak untuk produktivitas harian
+- Sistem XP dan leveling
+- Tampilan tugas paling mendesak
+- Grafik produktivitas mingguan
 
 ### 🍅 Pomodoro Timer
-- Customizable focus and break durations
-- Session tracking
-- Circular progress indicator
-- Automatic break scheduling
-- Long break after 4 sessions
+- Durasi fokus dan istirahat yang dapat disesuaikan
+- Pelacakan sesi
+- Indikator progres melingkar
+- Penjadwalan istirahat otomatis
+- Istirahat panjang setelah 4 sesi
 
 ### 📅 Calendar View
 - Monthly task visualization
@@ -36,51 +36,51 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 - Interactive date selection
 
 ### 📈 Analytics
-- Task completion rates
-- Priority distribution charts
-- Study pattern insights
-- Productivity trends
+- Tingkat penyelesaian tugas
+- Grafik distribusi prioritas
+- Wawasan pola belajar
+- Tren produktivitas
 
-### 🎴 Flashcard System
+### 🎴 Flashcard System (Coming Soon)
 - **SM-2 Spaced Repetition Algorithm**
-- Multiple deck support
-- Interactive study mode
-- Mastery tracking
-- 4-level rating system (Again, Hard, Good, Easy)
+- Dukungan banyak deck
+- Mode belajar interaktif
+- Pelacakan penguasaan materi
+- Sistem rating 4 level (Again, Hard, Good, Easy)
 
 ### 🏆 Gamification
-- XP earning system
-- Level progression
-- Achievement unlocking
-- Streak rewards
-
+- Sistem perolehan XP
+- Progres level
+- Pencapaian yang dapat di-unlock
+- Reward streak
+  
 ## 🏗️ Architecture
 
 ### Design Patterns
-- **MVC (Model-View-Controller)**: Clear separation of concerns
-- **Observer Pattern**: Real-time UI updates
-- **Factory Pattern**: Task creation
-- **Strategy Pattern**: Different urgency calculations per task type
+- **MVC (Model-View-Controller)**: Pemisahan concern yang jelas
+- **Observer Pattern**: Update UI real-time
+- **Factory Pattern**: Pembuatan tugas
+- **Strategy Pattern**: Kalkulasi urgensi yang berbeda per jenis tugas
 
 ### Project Structure
 ```
 SmartStudyPlanner/
 ├── src/
-│   ├── model/              # Data models and business logic
+│   ├── model/              # Model data and logika
 │   │   ├── Task.java
 │   │   ├── TaskManager.java
 │   │   ├── UserProfile.java
 │   │   ├── Flashcard.java
 │   │   └── ...
-│   ├── ui/                 # User interface views
+│   ├── ui/                 # Tampilan User interface 
 │   │   ├── DashboardView.java
 │   │   ├── TasksView.java
 │   │   ├── PomodoroView.java
 │   │   └── ...
-│   ├── controller/         # Application controllers
+│   ├── controller/         # Controllers aplikasi
 │   │   ├── MainController.java
 │   │   └── SmartScheduler.java
-│   ├── resources/          # CSS and assets
+│   ├── resources/          # CSS dan assets
 │   │   └── styles.css
 │   └── StudyPlannerApp.java
 └── README.md
@@ -88,24 +88,24 @@ SmartStudyPlanner/
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Java JDK 17 or higher
-- JavaFX SDK 17 or higher
-- Git (for cloning)
+### Persyaratan stack
+- Java JDK 17 atau lebih tinggi
+- JavaFX SDK 17 atau lebih tinggi
+- Git (untuk cloning)
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone repository**
 ```bash
 git clone https://github.com/YOUR_USERNAME/smart-study-planner.git
 cd smart-study-planner
 ```
 
 2. **Download JavaFX SDK**
-   - Download from: https://gluonhq.com/products/javafx/
-   - Extract to a location on your computer
+   - Download melalui: https://gluonhq.com/products/javafx/
+   - Extract ke lokasi di komputer Anda
 
-3. **Compile the project**
+3. **Compile project**
 ```bash
 javac -encoding UTF-8 \
       --module-path /path/to/javafx-sdk/lib \
@@ -117,7 +117,7 @@ javac -encoding UTF-8 \
       src/StudyPlannerApp.java
 ```
 
-4. **Run the application**
+4. **Run/jalankan project**
 ```bash
 java --module-path /path/to/javafx-sdk/lib \
      --add-modules javafx.controls,javafx.fxml \
@@ -125,36 +125,37 @@ java --module-path /path/to/javafx-sdk/lib \
      StudyPlannerApp
 ```
 
-### Using Maven (Recommended)
+### Menggunakan Maven (Direkomendasikan)
 
-1. **Install Maven** (if not already installed)
-2. **Run the application**
+1. **Install Maven** 
+2. **Run applikasi**
 ```bash
 mvn clean javafx:run
 ```
 
-## 💡 Usage Guide
+## 💡 Panduan Penggunaan
 
-### Creating Tasks
-1. Navigate to "Tasks" tab
-2. Click "+ Add Task"
-3. Fill in details (title, description, due date, priority)
-4. Select task type (Assignment/Exam/Project)
-5. Click "Add"
+### Membuat Tugas
+1. Navigasi ke tab "Tasks"
+2. Klik "+ Add Task"
+3. Isi detail (judul, deskripsi, tanggal jatuh tempo, prioritas)
+4. Pilih jenis tugas (Assignment/Exam/Project)
+5. Klik "Add"
 
-### Starting a Pomodoro Session
-1. Go to "Pomodoro" tab
-2. Adjust focus/break duration if needed
-3. Click "Start"
-4. Focus on your work until the timer ends
-5. Rate your session quality
+### Memulai Sesi Pomodoro
+1. Pergi ke tab "Pomodoro"
+2. Sesuaikan durasi fokus/istirahat jika diperlukan
+3. Klik "Start"
+4. Fokus pada pekerjaan Anda hingga timer selesai
+5. Beri rating kualitas sesi Anda
 
-### Using Flashcards
-1. Click "Flashcards" tab
-2. Create a new deck or use sample decks
-3. Add cards to your deck
-4. Click "Study Now" to begin
-5. Rate each card: Again, Hard, Good, or Easy
+### Menggunakan Flashcard (Cooming Soon)
+(rencana)
+Klik tab "Flashcards"
+Buat deck baru atau gunakan sample deck
+Tambahkan kartu ke deck Anda
+Klik "Study Now" untuk memulai
+Beri rating setiap kartu: Again, Hard, Good, atau Easy
 
 ## 🎨 Customization
 
@@ -171,16 +172,15 @@ Current theme: **Catppuccin Mocha**
 ## 🧪 Key Algorithms
 
 ### Urgency Scoring
-Each task type calculates urgency differently:
-- **Assignments**: Time pressure + priority + effort
-- **Exams**: Higher base urgency + preparedness
-- **Projects**: Completion percentage + time + priority
+Setiap jenis tugas menghitung urgensi secara berbeda:
+- **Assignments**: Tekanan waktu + prioritas + usaha
+- **Exams**: Urgensi dasar lebih tinggi + kesiapan
+- **Projects**: Persentase penyelesaian + waktu + prioritas
 
 ### Spaced Repetition (SM-2)
-Flashcards use the SuperMemo-2 algorithm:
-- Intervals: 1 day → 6 days → multiplied by ease factor
-- Ease factor adjusts based on performance
-- Failed cards reset to 1-day interval
+- Interval: 1 hari → 6 hari → dikalikan dengan ease factor
+- Ease factor menyesuaikan berdasarkan performa
+- Kartu yang gagal direset ke interval 1 hari
 
 
 ## 🙏 Acknowledgments

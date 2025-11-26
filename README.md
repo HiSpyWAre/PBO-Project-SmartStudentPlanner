@@ -15,6 +15,8 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 - **Sistem Prioritas Cerdas**: Kalkulasi urgensi otomatis
 - **Pelacakan Dependensi**: Hubungkan tugas yang terkait
 - **Monitoring Status**: Lacak progres dari TODO hingga selesai
+<img width="1919" height="1124" alt="image" src="https://github.com/user-attachments/assets/a8f58426-cb80-4320-a474-07667878f1db" />
+
 
 ### 📊 Dashboard
 - Tampilan statistik real-time
@@ -22,6 +24,8 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 - Sistem XP dan leveling
 - Tampilan tugas paling mendesak
 - Grafik produktivitas mingguan
+<img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/575930fa-5a29-4d1e-a077-3e236fea2850" />
+
 
 ### 🍅 Pomodoro Timer
 - Durasi fokus dan istirahat yang dapat disesuaikan
@@ -29,24 +33,27 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 - Indikator progres melingkar
 - Penjadwalan istirahat otomatis
 - Istirahat panjang setelah 4 sesi
+<img width="1919" height="1127" alt="image" src="https://github.com/user-attachments/assets/865e70d8-59c2-4688-b7d5-6846071689c5" />
+
 
 ### 📅 Calendar View
 - Monthly task visualization
 - Due date overview
 - Interactive date selection
+<img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/a44caadc-292c-4847-8d9a-f6666a376056" />
+
 
 ### 📈 Analytics
 - Tingkat penyelesaian tugas
 - Grafik distribusi prioritas
 - Wawasan pola belajar
 - Tren produktivitas
+<img width="1919" height="1124" alt="image" src="https://github.com/user-attachments/assets/e1786f81-d7fc-4c3b-b65e-9f0cd23319d0" />
+
 
 ### 🎴 Flashcard System (Coming Soon)
-- **SM-2 Spaced Repetition Algorithm**
-- Dukungan banyak deck
-- Mode belajar interaktif
-- Pelacakan penguasaan materi
-- Sistem rating 4 level (Again, Hard, Good, Easy)
+<img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/62458cbf-9964-452b-8038-9f43b3f98f8f" />
+
 
 ### 🏆 Gamification
 - Sistem perolehan XP

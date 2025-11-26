@@ -18,7 +18,7 @@ public class Achievement {
     }
     
     public boolean checkCondition(UserProfile profile) {
-        // Check specific conditions based on achievement name
+        // Cek kondisi spesifik berdasarkan nama achievement
         return switch (name) {
             case "Dedicated" -> profile.getStreak() >= 7;
             case "Master" -> profile.getLevel() >= 10;
@@ -28,15 +28,31 @@ public class Achievement {
         };
     }
     
+    // method untuk unlock achievement
     public void unlock() {
         this.unlocked = true;
         this.unlockedDate = LocalDateTime.now();
     }
     
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public int getXpReward() { return xpReward; }
-    public boolean isUnlocked() { return unlocked; }
-    public LocalDateTime getUnlockedDate() { return unlockedDate; }
+
+    public String getName() { 
+        return name; 
+    }
+
+    public String getDescription() { 
+        return description; 
+    }
+
+    public int getXpReward() { 
+        return xpReward; 
+    }
+
+    public boolean isUnlocked() { 
+        return unlocked; 
+    }
+
+    public LocalDateTime getUnlockedDate() { 
+        return unlockedDate; 
+    }
 }
 

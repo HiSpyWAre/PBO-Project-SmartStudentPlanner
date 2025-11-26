@@ -32,12 +32,13 @@ public class MainController {
         task.markComplete();
         taskManager.updateTask(task);
         
-        // Award XP based on task type and priority
+        // Award XP berdasarkan tipe tugas dan prioritas
         int xpReward = calculateXPReward(task);
         userProfile.addXP(xpReward);
         userProfile.updateStreak();
     }
     
+    // 
     private int calculateXPReward(Task task) {
         int baseXP = 50;
         int priorityBonus = task.getPriority().ordinal() * 25;
@@ -47,13 +48,7 @@ public class MainController {
         } else if (task instanceof Project) {
             typeBonus = 75;
 }
-        // int typeBonus = switch (task) {
-        //     case Exam e -> 100;
-        //     case Project p -> 75;
-        //     default -> 0;
-        // };
-        
-        // Bonus for completing on time
+
         int timeBonus = task.getActualHours() <= task.getEstimatedHours() ? 50 : 0;
         
         return baseXP + priorityBonus + typeBonus + timeBonus;

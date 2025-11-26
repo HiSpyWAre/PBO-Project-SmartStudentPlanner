@@ -1,6 +1,6 @@
 package model;
 
-// Enum for task status
+// Enum untuk status tugas
 public enum TaskStatus {
     TODO, IN_PROGRESS, COMPLETED, OVERDUE
 }

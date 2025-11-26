@@ -21,6 +21,7 @@ public class DashboardView {
     }
     
     private void buildView() {
+        // ketika scroll panel agar menyesuaikan user
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background: #2a2a3e; -fx-background-color: #2a2a3e;");
@@ -32,7 +33,7 @@ public class DashboardView {
         Label welcomeLabel = new Label("Welcome back, " + userProfile.getUsername() + "!");
         welcomeLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
-        // Stats cards row
+        // Stats cards row (box-box yg display dibawah welcome)
         HBox statsRow = createStatsRow();
         
         // Main content grid
@@ -40,11 +41,11 @@ public class DashboardView {
         mainGrid.setHgap(20);
         mainGrid.setVgap(20);
         
-        // Left column - Urgent tasks
+        // Kolom kiri - Urgent tasks
         VBox urgentTasksCard = createUrgentTasksCard();
         GridPane.setHgrow(urgentTasksCard, Priority.ALWAYS);
         
-        // Right column - Productivity chart
+        // Kolom kanan - Productivity chart
         VBox productivityCard = createProductivityCard();
         GridPane.setHgrow(productivityCard, Priority.ALWAYS);
         
@@ -58,7 +59,7 @@ public class DashboardView {
         scrollPane.setContent(content);
         view.setCenter(scrollPane);
     }
-    
+
     private HBox createStatsRow() {
         HBox row = new HBox(20);
         row.setAlignment(Pos.CENTER);
@@ -74,6 +75,7 @@ public class DashboardView {
         return row;
     }
     
+    // box yg besar untuk setiap statistik di dashboard
     private VBox createStatCard(String title, String value, String color) {
         VBox card = new VBox(10);
         card.setPadding(new Insets(20));
@@ -90,7 +92,8 @@ public class DashboardView {
         card.getChildren().addAll(titleLabel, valueLabel);
         return card;
     }
-    
+
+    // box untuk menampilkan tugas-tugas paling mendesak
     private VBox createUrgentTasksCard() {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));
@@ -106,10 +109,12 @@ public class DashboardView {
             .toList();
         
         if (urgentTasks.isEmpty()) {
+            // pesan ketika tidak ada tugas
             Label emptyLabel = new Label("No tasks yet! Add some to get started.");
             emptyLabel.setStyle("-fx-text-fill: #a6adc8; -fx-font-style: italic;");
             tasksList.getChildren().add(emptyLabel);
         } else {
+            // menampilkan setiap tugas mendesak
             for (Task task : urgentTasks) {
                 tasksList.getChildren().add(createTaskItem(task));
             }
@@ -119,6 +124,7 @@ public class DashboardView {
         return card;
     }
     
+    // menampilkan item tugas individual dalam daftar tugas mendesak
     private HBox createTaskItem(Task task) {
         HBox item = new HBox(15);
         item.setPadding(new Insets(15));
@@ -145,6 +151,7 @@ public class DashboardView {
         Label taskTitle = new Label(task.getTitle());
         taskTitle.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
+        // Due date
         String dueText = "Due: " + task.getDueDate().format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"));
         Label dueLabel = new Label(dueText);
         dueLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #a6adc8;");
@@ -159,6 +166,7 @@ public class DashboardView {
         return item;
     }
     
+    // box untuk menampilkan grafik produktivitas mingguan
     private VBox createProductivityCard() {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));
@@ -174,7 +182,8 @@ public class DashboardView {
         card.getChildren().addAll(title, chart);
         return card;
     }
-    
+
+    // membuat grafik batang sederhana untuk produktivitas mingguan
     private VBox createWeeklyChart() {
         VBox chart = new VBox(10);
         chart.setAlignment(Pos.BOTTOM_CENTER);
@@ -213,22 +222,27 @@ public class DashboardView {
         return chart;
     }
     
+    // box untuk menampilkan pencapaian terbaru pengguna
     private VBox createAchievementsCard() {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));
         card.setStyle("-fx-background-color: #313244; -fx-background-radius: 10;");
         
+        // Ikon dan judul
         Label title = new Label("🏆 Recent Achievements");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
+        // Barisan pencapaian
         HBox achievementsRow = new HBox(15);
         List<Achievement> unlocked = userProfile.getUnlockedAchievements();
         
         if (unlocked.isEmpty()) {
+            // pesan ketika tidak ada pencapaian
             Label emptyLabel = new Label("Complete tasks to unlock achievements!");
             emptyLabel.setStyle("-fx-text-fill: #a6adc8; -fx-font-style: italic;");
             achievementsRow.getChildren().add(emptyLabel);
         } else {
+            // menampilkan hingga maks 4 pencapaian terbaru
             for (Achievement achievement : unlocked.stream().limit(4).toList()) {
                 VBox achCard = createAchievementBadge(achievement);
                 achievementsRow.getChildren().add(achCard);
@@ -239,6 +253,7 @@ public class DashboardView {
         return card;
     }
     
+    // membuat badge pencapaian individual
     private VBox createAchievementBadge(Achievement achievement) {
         VBox badge = new VBox(10);
         badge.setAlignment(Pos.CENTER);
@@ -246,22 +261,27 @@ public class DashboardView {
         badge.setPrefWidth(150);
         badge.setStyle("-fx-background-color: #45475a; -fx-background-radius: 8;");
         
+        // Ikon
         Label icon = new Label("🏆");
         icon.setStyle("-fx-font-size: 32px;");
         
+        // Nama pencapaian
         Label name = new Label(achievement.getName());
         name.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #f9e2af; -fx-wrap-text: true;");
         name.setWrapText(true);
         name.setAlignment(Pos.CENTER);
         name.setMaxWidth(130);
         
+        // XP reward
         Label xp = new Label("+" + achievement.getXpReward() + " XP");
         xp.setStyle("-fx-font-size: 10px; -fx-text-fill: #a6adc8;");
         
+        // Menyusun elemen badge
         badge.getChildren().addAll(icon, name, xp);
         return badge;
     }
     
+    // Getter untuk view utama
     public BorderPane getView() {
         return view;
     }

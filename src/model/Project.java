@@ -15,6 +15,7 @@ public class Project extends Task {
     }
     
     @Override
+    // tingkat/score urgensi project yang di-display di dashboard
     public double calculateUrgencyScore() {
         long hoursUntilDue = java.time.Duration.between(LocalDateTime.now(), dueDate).toHours();
         double timeScore = 80.0 / (hoursUntilDue + 1);
@@ -24,21 +25,28 @@ public class Project extends Task {
         return timeScore + completionScore + priorityScore;
     }
     
+    // methods untuk mengelola subtasks
     public void addSubtask(Task task) {
         subtasks.add(task);
     }
-    
+
+    // menghitung persentase penyelesaian project berdasarkan subtasks
     public double getCompletionPercentage() {
+        // jika tidak ada subtasks, gunakan actualHours vs estimatedHours
         if (subtasks.isEmpty()) {
             return actualHours >= estimatedHours ? 100.0 : 
                    (double)actualHours / estimatedHours * 100.0;
         }
-        
+
+        // hitung berdasarkan subtasks
         long completed = subtasks.stream()
             .filter(t -> t.status == TaskStatus.COMPLETED)
             .count();
         return (double)completed / subtasks.size() * 100.0;
     }
     
-    public List<Task> getSubtasks() { return subtasks; }
+    // getter
+    public List<Task> getSubtasks() { 
+        return subtasks; 
+    }
 }

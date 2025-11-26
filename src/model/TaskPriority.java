@@ -1,6 +1,6 @@
 package model;
 
-// Enum for priority levels
+// Enum untuk level prioritas tugas
 public enum TaskPriority {
     LOW, MEDIUM, HIGH, URGENT
 }

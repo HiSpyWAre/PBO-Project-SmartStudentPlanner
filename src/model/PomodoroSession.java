@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class PomodoroSession {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private int duration; // in minutes
+    private int duration; // per menit
     private String taskName;
     private boolean completed;
     
@@ -24,9 +24,23 @@ public class PomodoroSession {
         this.completed = true;
     }
     
-    public LocalDateTime getStartTime() { return startTime; }
-    public LocalDateTime getEndTime() { return endTime; }
-    public int getDuration() { return duration; }
-    public String getTaskName() { return taskName; }
-    public boolean isCompleted() { return completed; }
+    public LocalDateTime getStartTime() { 
+        return startTime; 
+    }
+
+    public LocalDateTime getEndTime() { 
+        return endTime; 
+    }
+    
+    public int getDuration() { 
+        return duration; 
+    }
+
+    public String getTaskName() { 
+        return taskName; 
+    }
+
+    public boolean isCompleted() { 
+        return completed; 
+    }
 }

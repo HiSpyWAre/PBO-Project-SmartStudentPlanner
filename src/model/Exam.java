@@ -15,14 +15,16 @@ public class Exam extends Task {
     }
     
     @Override
+    // tingkat/score urgensi ujian yang di-display di dashboard
     public double calculateUrgencyScore() {
         long hoursUntilDue = java.time.Duration.between(LocalDateTime.now(), dueDate).toHours();
-        double timeScore = 150.0 / (hoursUntilDue + 1); // Higher multiplier for exams
+        double timeScore = 150.0 / (hoursUntilDue + 1); // multipliernya lebih tinggi untuk ujian
         double preparednessScore = (1.0 - (double)studyHoursCompleted / estimatedHours) * 50.0;
         
-        return timeScore + preparednessScore + 50.0; // Base score for exams
+        return timeScore + preparednessScore + 50.0; // Base score untuk exams = 50
     }
     
+    // getters dan setters
     public void addStudyHours(int hours) {
         studyHoursCompleted += hours;
         actualHours += hours;
@@ -32,6 +34,11 @@ public class Exam extends Task {
         return Math.min(100.0, (double)studyHoursCompleted / estimatedHours * 100.0);
     }
     
-    public List<String> getTopics() { return topics; }
-    public int getStudyHoursCompleted() { return studyHoursCompleted; }
+    public List<String> getTopics() { 
+        return topics; 
+    }
+
+    public int getStudyHoursCompleted() { 
+        return studyHoursCompleted; 
+    }
 }

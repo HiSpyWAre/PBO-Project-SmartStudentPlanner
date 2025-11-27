@@ -1,4 +1,5 @@
 // package smartStudyPlanner;
+// Main Application class - entry point untuk aplikasi, mengatur window utama dan navigasi: initiasialisasi database, load data, setup UI utama, window closing 
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,16 +20,16 @@ public class StudyPlannerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Initialize data models
+        // Inisialisasi data model 
         taskManager = new TaskManager();
         userProfile = new UserProfile("Student");
         controller = new MainController(taskManager, userProfile);
 
-        // Create main layout
+        // Main layout
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #1e1e2e;");
 
-        // Top: Header with title and user info
+        // Top: Header isinta judul dan info pengguna
         HBox header = createHeader();
         root.setTop(header);
 
@@ -45,13 +46,14 @@ public class StudyPlannerApp extends Application {
         DashboardView dashboardView = new DashboardView(taskManager, userProfile);
         contentArea.getChildren().add(dashboardView.getView());
 
-        // Setup navigation
+        // Setup navigation 
         setupNavigation(sidebar, contentArea);
 
         // Create scene
         Scene scene = new Scene(root, 1100, 750);
         primaryStage.setResizable(true);
 
+        // niatnya load stylesheet (css), tapi kalau gagal kasih warning di console
         try {
             scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         } catch (Exception e) {
@@ -63,10 +65,11 @@ public class StudyPlannerApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // Load sample data for testing
+        // Load sample data untuk testing
         loadSampleData();
     }
 
+    // method untuk membuat header - private untuk internal use saja
     private HBox createHeader() {
         HBox header = new HBox(20);
         header.setPadding(new Insets(15, 20, 15, 20));
@@ -89,12 +92,14 @@ public class StudyPlannerApp extends Application {
         return header;
     }
 
+    // method untuk membuat sidebar navigasi
     private VBox createSidebar() {
         VBox sidebar = new VBox(10);
         sidebar.setPadding(new Insets(20));
         sidebar.setPrefWidth(220);
         sidebar.setStyle("-fx-background-color: #181825; -fx-border-color: #313244; -fx-border-width: 0 1 0 0;");
 
+        // true = tombol terpilih, false = tidak
         Button dashboardBtn = createNavButton("📊 Dashboard", true);
         Button tasksBtn = createNavButton("✓ Tasks", false);
         Button calendarBtn = createNavButton("📅 Calendar", false);
@@ -112,12 +117,14 @@ public class StudyPlannerApp extends Application {
         return sidebar;
     }
 
+    // method untuk membuat tombol navigasi
     private Button createNavButton(String text, boolean selected) {
         Button btn = new Button(text);
         btn.setPrefWidth(180);
         btn.setPrefHeight(45);
         btn.setAlignment(Pos.CENTER_LEFT);
 
+        // Styling berdasarkan status terpilih atau tidak 
         if (selected) {
             btn.setStyle(
                     "-fx-background-color: #89b4fa; -fx-text-fill: #1e1e2e; -fx-font-size: 14px; -fx-font-weight: bold;");
@@ -133,7 +140,7 @@ public class StudyPlannerApp extends Application {
     }
 
     private void setupNavigation(VBox sidebar, StackPane contentArea) {
-        // Get buttons
+        // Get buttons (tombol) dari sidebar
         Button dashboardBtn = (Button) sidebar.getChildren().get(0);
         Button tasksBtn = (Button) sidebar.getChildren().get(1);
         Button calendarBtn = (Button) sidebar.getChildren().get(2);
@@ -141,7 +148,7 @@ public class StudyPlannerApp extends Application {
         Button flashcardsBtn = (Button) sidebar.getChildren().get(4);
         Button analyticsBtn = (Button) sidebar.getChildren().get(5);
 
-        // Setup click handlers
+        // Setup click handlers = mengarahkan ke view yang sesuai
         dashboardBtn.setOnAction(e -> {
             contentArea.getChildren().clear();
             contentArea.getChildren().add(new DashboardView(taskManager, userProfile).getView());
@@ -179,6 +186,7 @@ public class StudyPlannerApp extends Application {
         });
     }
 
+    // method untuk mengupdate styling tombol terpilih di sidebar
     private void updateSelectedButton(VBox sidebar, Button selectedBtn) {
         for (int i = 0; i < 6; i++) {
             Button btn = (Button) sidebar.getChildren().get(i);
@@ -191,6 +199,7 @@ public class StudyPlannerApp extends Application {
         }
     }
 
+    // method untuk load sample data
     private void loadSampleData() {
         // Add some sample tasks
         taskManager.addTask(new Assignment("Calculus Problem Set", "Complete Chapter 5 problems",
@@ -203,6 +212,7 @@ public class StudyPlannerApp extends Application {
                 java.time.LocalDateTime.now().plusDays(14), 10, TaskPriority.MEDIUM));
     }
 
+    // main method
     public static void main(String[] args) {
         launch(args);
     }

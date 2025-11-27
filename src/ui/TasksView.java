@@ -89,6 +89,7 @@ public class TasksView {
         return filters;
     }
     
+    @SuppressWarnings("unchecked")
     private TableView<Task> createTaskTable() {
         TableView<Task> table = new TableView<>();
         table.setItems(taskData);
@@ -243,6 +244,7 @@ public class TasksView {
                 setGraphic(empty ? null : buttons);
             }
         });
+        
         
         table.getColumns().addAll(checkCol, titleCol, typeCol, priorityCol, dueCol, statusCol, hoursCol, actionsCol);
         return table;

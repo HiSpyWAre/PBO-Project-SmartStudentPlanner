@@ -30,7 +30,7 @@ public class FlashcardsView {
         Label description = new Label("Spaced repetition flashcard system with smart review scheduling");
         description.setStyle("-fx-font-size: 14px; -fx-text-fill: #6c7086; -fx-font-style: italic;");
         
-        Button createDeckBtn = new Button("Create Your First Deck");
+        Button createDeckBtn = new Button("Create Your First Deck (SOON YA)");
         createDeckBtn.setStyle("-fx-background-color: #89b4fa; -fx-text-fill: #1e1e2e; " +
                               "-fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 15 30;");
         

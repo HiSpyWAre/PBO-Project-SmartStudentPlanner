@@ -97,6 +97,7 @@ public class PomodoroView {
         return stack;
     }
     
+    // method untuk membuat kontrol tombol
     private HBox createControls() {
         HBox controls = new HBox(20);
         controls.setAlignment(Pos.CENTER);

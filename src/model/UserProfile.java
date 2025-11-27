@@ -1,3 +1,4 @@
+// user profile model untuk menyimpan data pengguna
 package model;
 
 import java.time.LocalDate;
@@ -29,6 +30,7 @@ public class UserProfile {
         initializeAchievements();
     }
     
+    // inisialisasi daftar achievement dan kondisinya
     private void initializeAchievements() {
         achievements.add(new Achievement("First Steps", "Complete your first task", 50, false));
         achievements.add(new Achievement("Dedicated", "Maintain a 7-day streak", 200, false));
@@ -39,12 +41,14 @@ public class UserProfile {
         achievements.add(new Achievement("Master", "Reach level 10", 500, false));
     }
     
+    // menambahkan XP dan mengecek level up
     public void addXP(int amount) {
         xp += amount;
         checkLevelUp();
         checkAchievements();
     }
     
+    // mengecek dan menangani level up
     private void checkLevelUp() {
         int xpNeeded = level * 100;
         if (xp >= xpNeeded) {
@@ -54,6 +58,7 @@ public class UserProfile {
         }
     }
     
+    // memperbarui streak belajar yg di display di dashboard
     public void updateStreak() {
         LocalDate today = LocalDate.now();
         
@@ -67,17 +72,20 @@ public class UserProfile {
         checkAchievements();
     }
     
+    // merekam produktivitas belajar harian
     public void recordProductivity(int minutesStudied) {
         LocalDate today = LocalDate.now();
         productivityHistory.merge(today, minutesStudied, Integer::sum);
         updateStreak();
     }
     
+    // merekam sesi pomodoro
     public void recordPomodoro() {
         pomodoroHistory.add(25); // Standard 25-minute session
         addXP(10);
     }
     
+    // memperbarui distribusi waktu berdasarkan subject (matkul)
     private void checkAchievements() {
         for (Achievement achievement : achievements) {
             if (!achievement.isUnlocked() && achievement.checkCondition(this)) {
@@ -88,10 +96,12 @@ public class UserProfile {
         }
     }
     
+    // mendapatkan produktivitas minggu lalu
     public Map<LocalDate, Integer> getLastWeekProductivity() {
         Map<LocalDate, Integer> lastWeek = new HashMap<>();
         LocalDate today = LocalDate.now();
         
+        // mengisi data untuk 7 hari terakhir
         for (int i = 6; i >= 0; i--) {
             LocalDate date = today.minusDays(i);
             lastWeek.put(date, productivityHistory.getOrDefault(date, 0));
@@ -109,13 +119,34 @@ public class UserProfile {
     }
     
     // Getters
-    public String getUsername() { return username; }
-    public int getXP() { return xp; }
-    public int getLevel() { return level; }
-    public int getStreak() { return streak; }
-    public List<Achievement> getAchievements() { return achievements; }
+    public String getUsername() { 
+        return username; 
+    }
+
+    public int getXP() { 
+        return xp; 
+    }
+
+    public int getLevel() { 
+        return level; 
+    }
+
+    public int getStreak() { 
+        return streak; 
+    }
+
+    // generic getter untuk achievements
+    public List<Achievement> getAchievements() { 
+        return achievements; 
+    }
+
+    // getter untuk achievements yang sudah di-unlock
     public List<Achievement> getUnlockedAchievements() {
         return achievements.stream().filter(Achievement::isUnlocked).toList();
     }
-    public Map<LocalDate, Integer> getProductivityHistory() { return productivityHistory; }
+
+    // getter untuk productivity history
+    public Map<LocalDate, Integer> getProductivityHistory() { 
+        return productivityHistory; 
+    }
 }

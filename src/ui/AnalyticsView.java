@@ -4,8 +4,8 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 import model.*;
-// import java.time.*;
-// import java.time.format.DateTimeFormatter;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class AnalyticsView {
@@ -13,6 +13,7 @@ public class AnalyticsView {
     private TaskManager taskManager;
     private UserProfile userProfile;
     
+    // konstruktor untuk inisialisasi atribut
     public AnalyticsView(TaskManager taskManager, UserProfile userProfile) {
         this.taskManager = taskManager;
         this.userProfile = userProfile;
@@ -20,14 +21,17 @@ public class AnalyticsView {
         buildView();
     }
     
+    // method untuk membangun tampilan analytics
     private void buildView() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background: #2a2a3e; -fx-background-color: #2a2a3e;");
         
+        // box utama
         VBox content = new VBox(30);
         content.setPadding(new Insets(30));
         
+        // judul dalam tampilan
         Label title = new Label("📈 Analytics & Insights");
         title.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
@@ -48,17 +52,25 @@ public class AnalyticsView {
         view.setCenter(scrollPane);
     }
     
+    // method untuk membuat grid statistik
     private GridPane createStatsGrid() {
         GridPane grid = new GridPane();
         grid.setHgap(20);
         grid.setVgap(20);
         
+        // cards untuk statistik utama
         VBox totalTasks = createAnalyticCard("Total Tasks", 
             String.valueOf(taskManager.getAllTasks().size()), "#89b4fa");
+
+        // untuk tugas yang telah diselesaikan(completed)
         VBox completed = createAnalyticCard("Completed", 
             String.valueOf(taskManager.getTasksByStatus(TaskStatus.COMPLETED).size()), "#a6e3a1");
+        
+        // untuk tugas yang terlambat (overdue)
         VBox overdue = createAnalyticCard("Overdue", 
             String.valueOf(taskManager.getTasksByStatus(TaskStatus.OVERDUE).size()), "#f38ba8");
+        
+        // untuk rata-rata waktu penyelesaian tugas
         VBox avgTime = createAnalyticCard("Avg. Completion", "2.5 hrs", "#f9e2af");
         
         grid.add(totalTasks, 0, 0);
@@ -69,6 +81,7 @@ public class AnalyticsView {
         return grid;
     }
     
+    // method untuk membuat card analitik individual
     private VBox createAnalyticCard(String label, String value, String color) {
         VBox card = new VBox(15);
         card.setPadding(new Insets(25));
@@ -76,21 +89,26 @@ public class AnalyticsView {
         card.setPrefWidth(250);
         card.setStyle("-fx-background-color: #313244; -fx-background-radius: 10;");
         
+        // nilai utama
         Label valueLabel = new Label(value);
         valueLabel.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: " + color + ";");
         
+        // label deskriptif
         Label labelText = new Label(label);
         labelText.setStyle("-fx-font-size: 14px; -fx-text-fill: #a6adc8;");
         
+        // menambahkan elemen ke dalam card
         card.getChildren().addAll(valueLabel, labelText);
         return card;
     }
     
+    // method untuk membuat chart penyelesaian tugas
     private VBox createCompletionChart() {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));
         card.setStyle("-fx-background-color: #313244; -fx-background-radius: 10;");
         
+        // judul chart
         Label title = new Label("Task Completion Rate");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
@@ -98,6 +116,7 @@ public class AnalyticsView {
         int completed = taskManager.getTasksByStatus(TaskStatus.COMPLETED).size();
         double percentage = total > 0 ? (double) completed / total * 100 : 0;
         
+        // progress bar untuk menampilkan persentase penyelesaian
         ProgressBar progressBar = new ProgressBar(percentage / 100);
         progressBar.setPrefWidth(600);
         progressBar.setPrefHeight(30);
@@ -110,6 +129,7 @@ public class AnalyticsView {
         return card;
     }
     
+    // method untuk membuat chart distribusi prioritas tugas
     private VBox createPriorityDistribution() {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));
@@ -135,6 +155,7 @@ public class AnalyticsView {
         return card;
     }
     
+    // method untuk membuat bar prioritas individual
     private VBox createPriorityBar(String label, int count) {
         VBox bar = new VBox(10);
         bar.setAlignment(Pos.BOTTOM_CENTER);
@@ -162,6 +183,7 @@ public class AnalyticsView {
         return bar;
     }
     
+    // method untuk membuat card pola belajar (study patterns)
     private VBox createStudyPatterns() {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));

@@ -1,8 +1,6 @@
 # 📚 Smart Study Planner
 
-Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasiswa mengelola beban kerja akademik mereka secara efektif.
-
-(Screenshoot tmpilan)
+Aplikasi produktivitas berbasis GUI JavaFX yang komprehensif dirancang untuk membantu mahasiswa mengelola beban kerja akademik mereka secara efektif.
 
 ![Java](https://img.shields.io/badge/Java-17+-orange.svg)
 ![JavaFX](https://img.shields.io/badge/JavaFX-17.0.2-blue.svg)

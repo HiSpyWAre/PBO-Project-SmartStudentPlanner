@@ -37,9 +37,9 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 
 
 ### 📅 Calendar View
-- Monthly task visualization
-- Due date overview
-- Interactive date selection
+- Visualisasi tugas per bulannya
+- Tenggat tugas overview (di bawah kalender)
+- Tombol pemilihan yang interaktif
 <img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/a44caadc-292c-4847-8d9a-f6666a376056" />
 
 
@@ -52,7 +52,11 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 
 
 ### 🎴 Flashcard System (Coming Soon)
-<img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/62458cbf-9964-452b-8038-9f43b3f98f8f" />
+<img width="1591" height="1057" alt="image" src="https://github.com/user-attachments/assets/3895d742-c98e-41c4-8838-595504c05b96" />
+- Mendukung pemakaian multiple deck 
+- Pembelajaran dengan mode interaktif
+- Tracking penguasaan pengguna
+- 4-level rating system (Again, Hard, Good, Easy): dapat dipilih oleh pengguna setiap jawaban ditampilkan
 
 
 ### 🏆 Gamification

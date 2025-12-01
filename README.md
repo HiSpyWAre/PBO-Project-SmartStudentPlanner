@@ -157,12 +157,11 @@ mvn clean javafx:run
 5. Beri rating kualitas sesi Anda
 
 ### Menggunakan Flashcard (Cooming Soon)
-(rencana)
-Klik tab "Flashcards"
-Buat deck baru atau gunakan sample deck
-Tambahkan kartu ke deck Anda
-Klik "Study Now" untuk memulai
-Beri rating setiap kartu: Again, Hard, Good, atau Easy
+1. Klik tab "Flashcards"
+2. Buat deck baru atau gunakan sample deck
+3. Tambahkan kartu ke deck Anda
+4. Klik "Study Now" untuk memulai
+5. Beri rating setiap kartu: Again, Hard, Good, atau Easy 
 
 ## 🎨 Customization
 
@@ -171,10 +170,10 @@ Edit `src/resources/styles.css` to customize the color scheme.
 
 Current theme: **Catppuccin Mocha**
 
-### Adding New Task Types
-1. Create a new class extending `Task`
+### (Jika ingin menambah tipe tugas baru)
+1. Buat class baru dan extend `Task`
 2. Implement `calculateUrgencyScore()` method
-3. Add to the factory in `TasksView`
+3. Tambahkan logika di `TasksView`
 
 ## 🧪 Key Algorithms
 

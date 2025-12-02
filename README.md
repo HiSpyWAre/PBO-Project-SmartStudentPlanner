@@ -1,8 +1,6 @@
 # 📚 Smart Study Planner
 
-Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasiswa mengelola beban kerja akademik mereka secara efektif.
-
-(Screenshoot tmpilan)
+Aplikasi produktivitas berbasis GUI JavaFX yang komprehensif dirancang untuk membantu mahasiswa mengelola beban kerja akademik mereka secara efektif.
 
 ![Java](https://img.shields.io/badge/Java-17+-orange.svg)
 ![JavaFX](https://img.shields.io/badge/JavaFX-17.0.2-blue.svg)
@@ -36,9 +34,9 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 
 
 ### 📅 Calendar View
-- Monthly task visualization
-- Due date overview
-- Interactive date selection
+- Visualisasi tugas per bulannya
+- Tenggat tugas overview (di bawah kalender)
+- Tombol pemilihan yang interaktif
 <img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/a44caadc-292c-4847-8d9a-f6666a376056" />
 
 
@@ -51,7 +49,11 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 
 
 ### 🎴 Flashcard System (Coming Soon)
-<img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/62458cbf-9964-452b-8038-9f43b3f98f8f" />
+<img width="1591" height="1057" alt="image" src="https://github.com/user-attachments/assets/3895d742-c98e-41c4-8838-595504c05b96" />
+- Mendukung pemakaian multiple deck 
+- Pembelajaran dengan mode interaktif
+- Tracking penguasaan pengguna
+- 4-level rating system (Again, Hard, Good, Easy): dapat dipilih oleh pengguna setiap jawaban ditampilkan
 
 
 ### 🏆 Gamification
@@ -156,12 +158,11 @@ mvn clean javafx:run
 5. Beri rating kualitas sesi Anda
 
 ### Menggunakan Flashcard (Cooming Soon)
-(rencana)
-Klik tab "Flashcards"
-Buat deck baru atau gunakan sample deck
-Tambahkan kartu ke deck Anda
-Klik "Study Now" untuk memulai
-Beri rating setiap kartu: Again, Hard, Good, atau Easy
+1. Klik tab "Flashcards"
+2. Buat deck baru atau gunakan sample deck
+3. Tambahkan kartu ke deck Anda
+4. Klik "Study Now" untuk memulai
+5. Beri rating setiap kartu: Again, Hard, Good, atau Easy 
 
 ## 🎨 Customization
 
@@ -170,10 +171,10 @@ Edit `src/resources/styles.css` to customize the color scheme.
 
 Current theme: **Catppuccin Mocha**
 
-### Adding New Task Types
-1. Create a new class extending `Task`
+### (Jika ingin menambah tipe tugas baru)
+1. Buat class baru dan extend `Task`
 2. Implement `calculateUrgencyScore()` method
-3. Add to the factory in `TasksView`
+3. Tambahkan logika di `TasksView`
 
 ## 🧪 Key Algorithms
 

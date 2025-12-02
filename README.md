@@ -6,7 +6,6 @@ Aplikasi produktivitas JavaFX yang komprehensif dirancang untuk membantu mahasis
 
 ![Java](https://img.shields.io/badge/Java-17+-orange.svg)
 ![JavaFX](https://img.shields.io/badge/JavaFX-17.0.2-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ## ✨ Features
 

@@ -1,6 +1,6 @@
 package model;
 
-// Enum untuk level prioritas tugas
+// Enum mendefinisikan daftar (a list of predefined constant values) : sebagai level prioritas tugas
 public enum TaskPriority {
     LOW, MEDIUM, HIGH, URGENT
 }

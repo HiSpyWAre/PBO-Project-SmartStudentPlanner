@@ -31,6 +31,7 @@ class SmartScheduler {
             if (task.getStatus() == TaskStatus.COMPLETED) continue;
             if (!task.canStart()) continue; // Check dependencies
             
+            // 
             int hoursNeeded = task.getEstimatedHours() - task.getActualHours();
             
             // penjadwalan dalam blok 2 jam selama jam optimal (9 pagi - 9 malam)

@@ -5,9 +5,10 @@ import java.util.*;
 
 // Abstract base class untuk semua jenis tugas
 public abstract class Task {
+    // idCounter untuk generate unique IDs
     private static int idCounter = 0;
     
-    // menggunakan protected agar bisa diakses oleh subclass
+    // menggunakan protected agar variabel bisa diakses oleh subclass
     protected int id;
     protected String title;
     protected String description;
@@ -17,8 +18,8 @@ public abstract class Task {
     protected TaskPriority priority;
     protected int estimatedHours;
     protected int actualHours;
-    protected List<String> tags;
-    protected List<Task> dependencies;
+    protected List<String> tags; // 
+    protected List<Task> dependencies; // tugas yang harus diselesaikan sebelum tugas ini bisa dimulai
     
     public Task(String title, String description, LocalDateTime dueDate, 
                 int estimatedHours, TaskPriority priority) {
@@ -35,31 +36,33 @@ public abstract class Task {
         this.dependencies = new ArrayList<>();
     }
     
-    // Abstract method - beda jenis tugas meng-kategorikan scre urgency nya
+    // Abstract method - beda jenis tugas meng-kategorikan score urgency nya
     public abstract double calculateUrgencyScore();
     
-    // Common methods untuk semua tugas
+    // Common methods untuk semua tugas: 
     // method untuk menandai as complete
     public void markComplete() {
         this.status = TaskStatus.COMPLETED;
     }
     
-    // 
+    // method untuk menambahkan tag
     public void addDependency(Task task) {
         dependencies.add(task);
     }
     
+    // method untuk mengecek apakah tugas bisa dimulai (semua dependencies sudah complete)
     public boolean canStart() {
         return dependencies.stream().allMatch(t -> t.status == TaskStatus.COMPLETED);
     }
     
+    // method untuk mengupdate status berdasarkan due date dan actual hours(progress)
     public void updateStatus() {
         if (status == TaskStatus.COMPLETED) return;
         
         if (LocalDateTime.now().isAfter(dueDate)) {
-            status = TaskStatus.OVERDUE;
+            status = TaskStatus.OVERDUE; // kelewatan deadline
         } else if (actualHours > 0) {
-            status = TaskStatus.IN_PROGRESS;
+            status = TaskStatus.IN_PROGRESS; // sedang dikerjakan
         }
     }
     

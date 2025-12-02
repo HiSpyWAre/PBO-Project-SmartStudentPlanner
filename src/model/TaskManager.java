@@ -71,6 +71,7 @@ public class TaskManager {
         observers.add(observer);
     }
     
+    // notify semua observer ketika ada perubahan pada daftar tugas
     private void notifyObservers() {
         observers.forEach(TaskObserver::onTasksChanged);
     }

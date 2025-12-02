@@ -34,11 +34,11 @@ public class Project extends Task {
     public double getCompletionPercentage() {
         // jika tidak ada subtasks, gunakan actualHours vs estimatedHours
         if (subtasks.isEmpty()) {
-            return actualHours >= estimatedHours ? 100.0 : 
+            return actualHours >= estimatedHours ? 100.0 : // jika waktu pengerjaan >= estimasi, dianggap selesai
                    (double)actualHours / estimatedHours * 100.0;
         }
 
-        // hitung berdasarkan subtasks
+        // hitung progress berdasarkan subtasks yang sudah selesai
         long completed = subtasks.stream()
             .filter(t -> t.status == TaskStatus.COMPLETED)
             .count();

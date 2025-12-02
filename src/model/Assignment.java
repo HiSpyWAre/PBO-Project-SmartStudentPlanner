@@ -22,7 +22,7 @@ public class Assignment extends Task {
         double priorityScore = priority.ordinal() * 25.0; // HIGH = 75, MEDIUM = 50, LOW = 25
         double effortScore = estimatedHours * 5.0; // tugas lama lebih urgent
         
-        return timeScore + priorityScore + effortScore;
+        return timeScore + priorityScore + effortScore; // perhitungan di combine dari waktu + segi prioritas + tenaga
     }
     
     // getters dan setters

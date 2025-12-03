@@ -19,7 +19,7 @@ Aplikasi produktivitas berbasis GUI JavaFX yang komprehensif dirancang untuk mem
 - Tampilan statistik real-time
 - Pelacakan streak untuk produktivitas harian
 - Sistem XP dan leveling
-- Tampilan tugas paling mendesak
+- Tampilan tugas paling mendesak dan skor urgensi-nya
 - Grafik produktivitas mingguan
 <img width="1919" height="1129" alt="image" src="https://github.com/user-attachments/assets/575930fa-5a29-4d1e-a077-3e236fea2850" />
 

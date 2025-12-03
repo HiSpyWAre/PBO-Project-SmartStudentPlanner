@@ -49,12 +49,11 @@ Aplikasi produktivitas berbasis GUI JavaFX yang komprehensif dirancang untuk mem
 
 
 ### 🎴 Flashcard System (Coming Soon)
-<img width="1591" height="1057" alt="image" src="https://github.com/user-attachments/assets/3895d742-c98e-41c4-8838-595504c05b96" />
 - Mendukung pemakaian multiple deck
 - Pembelajaran dengan mode interaktif
 - Tracking penguasaan pengguna
 - 4-level rating system (Again, Hard, Good, Easy): dapat dipilih oleh pengguna setiap jawaban ditampilkan dan menilai secara sederhana level penguasaan materi 
-
+<img width="1591" height="1057" alt="image" src="https://github.com/user-attachments/assets/3895d742-c98e-41c4-8838-595504c05b96" />
 
 ### 🏆 Gamification
 - Sistem perolehan XP

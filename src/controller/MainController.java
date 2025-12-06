@@ -38,8 +38,24 @@ public class MainController {
         int xpReward = calculateXPReward(task);
         userProfile.addXP(xpReward);
         userProfile.updateStreak();
+        checkFirstStepsAchievement();
+
     }
     
+    private void checkFirstStepsAchievement() {
+    Achievement firstSteps = userProfile.getAchievements().stream()
+        .filter(a -> a.getName().equals("First Steps"))
+        .findFirst()
+        .orElse(null);
+    
+    if (firstSteps != null && !firstSteps.isUnlocked()) {
+        if (taskManager.getTasksByStatus(TaskStatus.COMPLETED).size() >= 1) {
+            firstSteps.unlock();
+            userProfile.addXP(firstSteps.getXpReward());
+            System.out.println("Achievement unlocked: First Steps!");
+        }
+    }
+}
     // method untuk menghitung XP reward 
     private int calculateXPReward(Task task) {
         int baseXP = 50;

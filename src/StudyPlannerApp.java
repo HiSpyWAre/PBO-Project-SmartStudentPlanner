@@ -20,7 +20,7 @@ public class StudyPlannerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Inisialisasi data model 
+        // Inisialisasi data model
         taskManager = new TaskManager();
         userProfile = new UserProfile("Student");
         controller = new MainController(taskManager, userProfile);
@@ -46,12 +46,18 @@ public class StudyPlannerApp extends Application {
         DashboardView dashboardView = new DashboardView(taskManager, userProfile);
         contentArea.getChildren().add(dashboardView.getView());
 
-        // Setup navigation 
+        // Setup navigation
         setupNavigation(sidebar, contentArea);
 
         // Create scene
-        Scene scene = new Scene(root, 1100, 750);
+        Scene scene = new Scene(root, 1000, 750);
         primaryStage.setResizable(true);
+        primaryStage.setMinWidth(1000); // Minimum width
+        primaryStage.setMinHeight(700); // Minimum height
+
+        primaryStage.setTitle("Smart Study Planner");
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
         // niatnya load stylesheet (css), tapi kalau gagal kasih warning di console
         try {
@@ -124,7 +130,7 @@ public class StudyPlannerApp extends Application {
         btn.setPrefHeight(45);
         btn.setAlignment(Pos.CENTER_LEFT);
 
-        // Styling berdasarkan status terpilih atau tidak 
+        // Styling berdasarkan status terpilih atau tidak
         if (selected) {
             btn.setStyle(
                     "-fx-background-color: #89b4fa; -fx-text-fill: #1e1e2e; -fx-font-size: 14px; -fx-font-weight: bold;");
@@ -202,13 +208,13 @@ public class StudyPlannerApp extends Application {
     // method untuk load sample data
     private void loadSampleData() {
         // Add some sample tasks
-        taskManager.addTask(new Assignment("Calculus Problem Set", "Complete Chapter 5 problems",
+        taskManager.addTask(new Assignment("Metnum Problem Set", "Complete 2 & 3 stage",
                 java.time.LocalDateTime.now().plusDays(3), 2, TaskPriority.HIGH));
 
-        taskManager.addTask(new Exam("Physics Midterm", "Chapters 1-6",
+        taskManager.addTask(new Exam("Laprak Sistem Operasi", "laprak 10-12",
                 java.time.LocalDateTime.now().plusDays(7), 5));
 
-        taskManager.addTask(new Project("Software Engineering Project", "Build JavaFX application",
+        taskManager.addTask(new Project("PBO Project", "Build Java OOP application",
                 java.time.LocalDateTime.now().plusDays(14), 10, TaskPriority.MEDIUM));
     }
 

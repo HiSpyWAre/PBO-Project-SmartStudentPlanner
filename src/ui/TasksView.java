@@ -15,6 +15,8 @@ public class TasksView {
     private TaskManager taskManager;
     private TableView<Task> taskTable;
     private ObservableList<Task> taskData;
+    private ComboBox<String> statusFilterCombo;  
+    private ComboBox<String> priorityFilterCombo; 
     
     public TasksView(TaskManager taskManager) {
         this.taskManager = taskManager;
@@ -77,6 +79,7 @@ public class TasksView {
         priorityFilter.getItems().addAll("All Priorities", "Urgent", "High", "Medium", "Low");
         priorityFilter.setValue("All Priorities");
         priorityFilter.setStyle("-fx-background-color: #313244; -fx-text-fill: #cdd6f4;");
+        priorityFilter.setOnAction(e -> applyFilters(statusFilter.getValue(), priorityFilter.getValue()));
         
         TextField searchField = new TextField();
         searchField.setPromptText("Search tasks...");
@@ -89,6 +92,46 @@ public class TasksView {
         return filters;
     }
     
+        private void applyFilters(String statusFilter, String priorityFilter) {
+        taskData.clear();
+        
+        List<Task> filtered = taskManager.getAllTasks();
+        
+        // Apply status filter
+        if (!statusFilter.equals("All")) {
+            filtered = filtered.stream()
+                .filter(t -> {
+                    TaskStatus status = switch (statusFilter) {
+                        case "To Do" -> TaskStatus.TODO;
+                        case "In Progress" -> TaskStatus.IN_PROGRESS;
+                        case "Completed" -> TaskStatus.COMPLETED;
+                        case "Overdue" -> TaskStatus.OVERDUE;
+                        default -> null;
+                    };
+                    return status != null && t.getStatus() == status;
+                })
+                .toList();
+        }
+        
+        // Apply priority filter
+        if (!priorityFilter.equals("All Priorities")) {
+            filtered = filtered.stream()
+                .filter(t -> {
+                    TaskPriority priority = switch (priorityFilter) {
+                        case "Urgent" -> TaskPriority.URGENT;
+                        case "High" -> TaskPriority.HIGH;
+                        case "Medium" -> TaskPriority.MEDIUM;
+                        case "Low" -> TaskPriority.LOW;
+                        default -> null;
+                    };
+                    return priority != null && t.getPriority() == priority;
+                })
+                .toList();
+        }
+        
+        taskData.addAll(filtered);
+    }
+
     @SuppressWarnings("unchecked")
     private TableView<Task> createTaskTable() {
         TableView<Task> table = new TableView<>();
@@ -300,6 +343,8 @@ public class TasksView {
         
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButtonType) {
+                System.out.println("Selected priority: " + priorityBox.getValue());
+                
                 LocalDateTime dueDateTime = LocalDateTime.of(
                     datePicker.getValue(), 
                     LocalTime.of(hourSpinner.getValue(), 0)
@@ -328,6 +373,8 @@ public class TasksView {
                     );
                     default -> null;
                 };
+
+                System.out.println("Task priority: " + task.getPriority());
                 
                 return task;
             }
@@ -341,12 +388,83 @@ public class TasksView {
     }
     
     private void showEditTaskDialog(Task task) {
-        // Similar to add dialog but with pre-filled values
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Edit Task");
-        alert.setHeaderText("Editing: " + task.getTitle());
-        alert.setContentText("Edit functionality will be implemented here");
-        alert.showAndWait();
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.setTitle("Edit Task");
+        dialog.setHeaderText("Editing: " + task.getTitle());
+        
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
+        
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20));
+        
+        // PRE-FILL with existing values
+        TextField titleField = new TextField(task.getTitle());
+        titleField.setPromptText("Task title");
+        
+        TextArea descField = new TextArea(task.getDescription());
+        descField.setPromptText("Description");
+        descField.setPrefRowCount(3);
+        
+        ComboBox<TaskPriority> priorityBox = new ComboBox<>();
+        priorityBox.getItems().addAll(TaskPriority.values());
+        priorityBox.setValue(task.getPriority());
+        
+        DatePicker datePicker = new DatePicker(task.getDueDate().toLocalDate());
+        
+        Spinner<Integer> hourSpinner = new Spinner<>(0, 23, task.getDueDate().getHour());
+        
+        Spinner<Integer> estimatedHoursSpinner = new Spinner<>(1, 100, task.getEstimatedHours());
+        
+        grid.add(new Label("Title:"), 0, 0);
+        grid.add(titleField, 1, 0);
+        grid.add(new Label("Description:"), 0, 1);
+        grid.add(descField, 1, 1);
+        grid.add(new Label("Priority:"), 0, 2);
+        grid.add(priorityBox, 1, 2);
+        grid.add(new Label("Due Date:"), 0, 3);
+        grid.add(datePicker, 1, 3);
+        grid.add(new Label("Due Hour:"), 0, 4);
+        grid.add(hourSpinner, 1, 4);
+        grid.add(new Label("Estimated Hours:"), 0, 5);
+        grid.add(estimatedHoursSpinner, 1, 5);
+        
+        dialog.getDialogPane().setContent(grid);
+        
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == saveButtonType) {
+                // Update task properties
+                task.setTitle(titleField.getText());
+                task.setDescription(descField.getText());
+                task.setPriority(priorityBox.getValue());
+                
+                LocalDateTime newDueDate = LocalDateTime.of(
+                    datePicker.getValue(),
+                    LocalTime.of(hourSpinner.getValue(), 0)
+                );
+                task.setDueDate(newDueDate);
+                task.setEstimatedHours(estimatedHoursSpinner.getValue());
+                
+                return true;
+            }
+            return false;
+        });
+        
+        dialog.showAndWait().ifPresent(saved -> {
+            if (saved) {
+                taskManager.updateTask(task);
+                taskTable.refresh(); // Refresh table to show changes
+                
+                // Show success message
+                Alert success = new Alert(Alert.AlertType.INFORMATION);
+                success.setTitle("Success");
+                success.setHeaderText(null);
+                success.setContentText("Task updated successfully!");
+                success.showAndWait();
+            }
+        });
     }
     
     private void filterTasks(String filter) {

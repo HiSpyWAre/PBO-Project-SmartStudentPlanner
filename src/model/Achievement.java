@@ -20,9 +20,14 @@ public class Achievement {
     public boolean checkCondition(UserProfile profile) {
         // Cek kondisi spesifik berdasarkan nama achievement
         return switch (name) {
+            case "First Steps" -> {
+            // Check if any task completed (need TaskManager reference)
+                yield false; // Will be checked in MainController
+            }
+
             case "Dedicated" -> profile.getStreak() >= 7;
-            case "Master" -> profile.getLevel() >= 10;
-            case "Marathon Runner" -> profile.getProductivityHistory().values().stream()
+            case "Marathon Runner" -> profile.getLevel() >= 10;
+            case "Master" -> profile.getProductivityHistory().values().stream()
                 .anyMatch(minutes -> minutes >= 600);
             default -> false;
         };

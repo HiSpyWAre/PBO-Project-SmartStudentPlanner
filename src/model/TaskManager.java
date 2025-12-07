@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class TaskManager {
     private List<Task> tasks;
-    private List<TaskObserver> observers;
+    private List<TaskObserver> observers; // observer untuk perubahan tugas
     
     public TaskManager() {
         this.tasks = new ArrayList<>();

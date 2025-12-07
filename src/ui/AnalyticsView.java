@@ -192,6 +192,7 @@ public class AnalyticsView {
         Label title = new Label("📊 Study Patterns");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
+        // ini baru example, bisa dihubungin ke model StudyStatistics 
         Label insight1 = new Label("• Most productive time: Mornings (9-11 AM)");
         Label insight2 = new Label("• Average study session: 45 minutes");
         Label insight3 = new Label("• Best completion rate: Assignments (85%)");

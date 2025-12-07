@@ -8,7 +8,7 @@ public class StudyStatistics {
     private TaskManager taskManager;
     
     // constructor
-    public StudyStatistics(UserProfile profile, TaskManager taskManager) {
+    public StudyStatistics(UserProfile profile, TaskManager taskManager) {  
         this.profile = profile;
         this.taskManager = taskManager;
     }

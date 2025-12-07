@@ -95,12 +95,30 @@ public class DashboardView {
         VBox tasksCard = createStatCard("✓ Completed", 
             taskManager.getTasksByStatus(TaskStatus.COMPLETED).size() + " tasks", "#a6e3a1");
         VBox hoursCard = createStatCard("⏱ Study Time", 
-            userProfile.getTotalStudyMinutes() / 60 + " hours", "#f9e2af");
-        
+            // userProfile.getTotalStudyMinutes() / 60 + " hours", "#f9e2af");
+             formatStudyTime(userProfile.getTotalStudyMinutes()), "#f9e2af");
         row.getChildren().addAll(streakCard, levelCard, tasksCard, hoursCard);
         return row;
     }
     
+    
+    private String formatStudyTime(int totalMinutes) {
+        if (totalMinutes < 60) {
+            // Jika kurang dari 1 jam, tampilkan menit saja
+            return totalMinutes + " mins";
+        }
+        
+        int hours = totalMinutes / 60;
+        int remainingMinutes = totalMinutes % 60;
+        
+        if (remainingMinutes == 0) {
+            // Tepat X jam
+            return hours + " hrs";
+        } else {
+            // X jam Y menit
+            return hours + " hrs " + remainingMinutes + " mins";
+        }
+    }
     // box yg besar untuk setiap statistik di dashboard
     private VBox createStatCard(String title, String value, String color) {
         VBox card = new VBox(10);

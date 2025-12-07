@@ -21,10 +21,12 @@ public class TasksView {
     private TableView<Task> taskTable;
     private ObservableList<Task> taskData;
     
+    // method overloading 1
     public TasksView(TaskManager taskManager) {
         this(taskManager, null);
     }
     
+    // method overloading 2
     public TasksView(TaskManager taskManager, MainController controller) {
         this.taskManager = taskManager;
         this.controller = controller;

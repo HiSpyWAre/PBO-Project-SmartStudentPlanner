@@ -4,7 +4,6 @@ package model;
 import java.time.LocalDateTime;
 // import java.util.*;
 
-
 public class PomodoroSession {
     private LocalDateTime startTime;
     private LocalDateTime endTime;

@@ -27,7 +27,7 @@ public class UserProfile {
         this.achievements = new ArrayList<>();
         this.pomodoroHistory = new ArrayList<>();
         this.subjectTimeDistribution = new HashMap<>();
-        this.observers = new ArrayList<>(); // ← TAMBAH INI
+        this.observers = new ArrayList<>(); 
         initializeAchievements();
         }
     
@@ -42,7 +42,7 @@ public class UserProfile {
         achievements.add(new Achievement("Master", "Reach level 10", 500, false));
     }
     
-        // Tambah method-method ini di akhir class (sebelum closing brace)
+    
     public void addObserver(ProfileObserver observer) {
         if (!observers.contains(observer)) {
             observers.add(observer);

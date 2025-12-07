@@ -1,20 +1,15 @@
 package model;
 
+// Interface untuk mengamati perubahan pada UserProfile
 public interface ProfileObserver {
     void onXPChanged(int newXP, int newLevel);
     
-    /**
-     * Dipanggil ketika streak berubah
-     */
+    // Dipanggil ketika streak berubah
     void onStreakChanged(int newStreak);
     
-    /**
-     * Dipanggil ketika achievement di-unlock
-     */
+    // Dipanggil ketika achievement di-unlock
     void onAchievementUnlocked(Achievement achievement);
     
-    /**
-     * Dipanggil ketika produktivitas di-record
-     */
+    // Dipanggil ketika produktivitas di-record
     void onProductivityRecorded(int minutes);
 }

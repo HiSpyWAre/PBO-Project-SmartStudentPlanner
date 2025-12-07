@@ -85,18 +85,47 @@ public class Flashcard {
     }
     
     // Getters and setters
-    public int getId() { return id; }
-    public String getQuestion() { return question; }
-    public void setQuestion(String question) { this.question = question; }
-    public String getAnswer() { return answer; }
-    public void setAnswer(String answer) { this.answer = answer; }
-    public String getHint() { return hint; }
-    public void setHint(String hint) { this.hint = hint; }
-    public int getRepetitions() { return repetitions; }
-    public int getInterval() { return interval; }
-    public LocalDateTime getNextReview() { return nextReview; }
-    public LocalDateTime getCreatedDate() { return createdDate; }
-    public LocalDateTime getLastReviewed() { return lastReviewed; }
-    public int getTotalReviews() { return totalReviews; }
-    public int getCorrectCount() { return correctCount; }
+    public int getId() { 
+        return id; 
+    }
+    public String getQuestion() { 
+        return question; 
+    }
+    public void setQuestion(String question) { 
+        this.question = question; 
+    }
+    public String getAnswer() { 
+        return answer; 
+    }
+    public void setAnswer(String answer) { 
+        this.answer = answer; 
+    }
+    public String getHint() { 
+        return hint; 
+    }
+    public void setHint(String hint) { 
+        this.hint = hint; 
+    }
+    public int getRepetitions() { 
+        return repetitions; 
+    }
+    public int getInterval() { 
+        return interval; 
+    }
+    public LocalDateTime getNextReview() { 
+        return nextReview; 
+    }
+    public LocalDateTime getCreatedDate() { 
+        return createdDate; 
+    }
+    public LocalDateTime getLastReviewed() { 
+        return lastReviewed; 
+    }
+    public int getTotalReviews() { 
+        return totalReviews; 
+    }
+
+    public int getCorrectCount() { 
+        return correctCount; 
+    }
 }

@@ -56,6 +56,7 @@ public class CalendarView {
         Label monthLabel = new Label(currentMonth.format(DateTimeFormatter.ofPattern("MMMM yyyy")));
         monthLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
         
+        // tombol geser bulan ke depan
         Button nextBtn = new Button("▶");
         nextBtn.setStyle("-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-font-size: 16px;");
         nextBtn.setOnAction(e -> {

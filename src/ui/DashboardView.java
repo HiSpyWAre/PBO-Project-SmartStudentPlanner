@@ -13,12 +13,34 @@ public class DashboardView {
     private TaskManager taskManager;
     private UserProfile userProfile;
     
+    // Store references to UI components for refresh
+    private Label streakValue;
+    private Label levelValue;
+    private Label tasksValue;
+    private Label hoursValue;
+    private VBox urgentTasksList;
+    private HBox productivityChart;
+
     public DashboardView(TaskManager taskManager, UserProfile userProfile) {
         this.taskManager = taskManager;
         this.userProfile = userProfile;
         this.view = new BorderPane();
+
+        // // REGISTER AS OBSERVER
+        // taskManager.addObserver(this); 
+
         buildView();
     }
+
+    //  // IMPLEMENT OBSERVER METHOD
+    // @Override
+    // public void onTasksChanged() {
+    //     // Refresh dashboard when tasks change
+    //     javafx.application.Platform.runLater(() -> {
+    //         buildView();  // Rebuild entire view (simple approach)
+    //         // Or update specific components (more efficient)
+    //     });
+    // }
     
     private void buildView() {
         // ketika scroll panel agar menyesuaikan user
@@ -59,6 +81,10 @@ public class DashboardView {
         scrollPane.setContent(content);
         view.setCenter(scrollPane);
     }
+
+    //     public BorderPane getView() {
+    //     return view;
+    // }
 
     private HBox createStatsRow() {
         HBox row = new HBox(20);

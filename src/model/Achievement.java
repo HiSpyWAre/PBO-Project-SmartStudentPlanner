@@ -10,6 +10,7 @@ public class Achievement {
     private boolean unlocked;
     private LocalDateTime unlockedDate;
     
+    // cnstructor achievement mempunyai argumen:
     public Achievement(String name, String description, int xpReward, boolean unlocked) {
         this.name = name;
         this.description = description;

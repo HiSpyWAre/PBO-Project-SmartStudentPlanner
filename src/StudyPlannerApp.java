@@ -1,6 +1,3 @@
-// package smartStudyPlanner;
-// Main Application class - entry point untuk aplikasi, mengatur window utama dan navigasi: initiasialisasi database, load data, setup UI utama, window closing 
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,6 +14,11 @@ public class StudyPlannerApp extends Application {
     private TaskManager taskManager;
     private UserProfile userProfile;
     private MainController controller;
+    
+    // UI components yang perlu di-update
+    private Label userInfoLabel;
+    private StackPane contentArea;
+    private VBox sidebar;
 
     @Override
     public void start(Stage primaryStage) {
@@ -29,22 +31,21 @@ public class StudyPlannerApp extends Application {
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #1e1e2e;");
 
-        // Top: Header isinta judul dan info pengguna
+        // Top: Header dengan info pengguna
         HBox header = createHeader();
         root.setTop(header);
 
         // Left: Navigation sidebar
-        VBox sidebar = createSidebar();
+        sidebar = createSidebar();
         root.setLeft(sidebar);
 
-        // Center: Main content area (will switch between views)
-        StackPane contentArea = new StackPane();
+        // Center: Main content area
+        contentArea = new StackPane();
         contentArea.setStyle("-fx-background-color: #2a2a3e;");
         root.setCenter(contentArea);
 
         // Initialize with dashboard view
-        DashboardView dashboardView = new DashboardView(taskManager, userProfile);
-        contentArea.getChildren().add(dashboardView.getView());
+        switchToDashboard();
 
         // Setup navigation
         setupNavigation(sidebar, contentArea);
@@ -52,30 +53,118 @@ public class StudyPlannerApp extends Application {
         // Create scene
         Scene scene = new Scene(root, 1000, 750);
         primaryStage.setResizable(true);
-        primaryStage.setMinWidth(1000); // Minimum width
-        primaryStage.setMinHeight(700); // Minimum height
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(700);
 
         primaryStage.setTitle("Smart Study Planner");
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // niatnya load stylesheet (css), tapi kalau gagal kasih warning di console
+        // Load stylesheet
         try {
             scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         } catch (Exception e) {
             System.out.println("Warning: Could not load styles.css - using default styling");
         }
-        // scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
-        primaryStage.setTitle("Smart Study Planner");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        // Load sample data untuk testing
+        // Load sample data
         loadSampleData();
+        
+        // ⭐ REGISTER OBSERVER untuk real-time updates
+        setupProfileObserver();
+    }
+    
+    /**
+     * Setup observer untuk mendengarkan perubahan pada UserProfile
+     */
+    private void setupProfileObserver() {
+        userProfile.addObserver(new ProfileObserver() {
+            @Override
+            public void onXPChanged(int newXP, int newLevel) {
+                // Update header info secara real-time
+                javafx.application.Platform.runLater(() -> {
+                    updateUserInfoLabel();
+                    // Refresh current view jika Dashboard
+                    refreshCurrentView();
+                });
+            }
+            
+            @Override
+            public void onStreakChanged(int newStreak) {
+                javafx.application.Platform.runLater(() -> {
+                    refreshCurrentView();
+                });
+            }
+            
+            @Override
+            public void onAchievementUnlocked(Achievement achievement) {
+                javafx.application.Platform.runLater(() -> {
+                    showAchievementNotification(achievement);
+                    refreshCurrentView();
+                });
+            }
+            
+            @Override
+            public void onProductivityRecorded(int minutes) {
+                javafx.application.Platform.runLater(() -> {
+                    refreshCurrentView();
+                });
+            }
+        });
+    }
+    
+    /**
+     * Update label info user di header
+     */
+    private void updateUserInfoLabel() {
+        if (userInfoLabel != null) {
+            userInfoLabel.setText("Level " + userProfile.getLevel() + " • " + userProfile.getXP() + " XP");
+        }
+    }
+    
+    /**
+     * Refresh view yang sedang aktif
+     */
+    private void refreshCurrentView() {
+        if (contentArea.getChildren().isEmpty()) return;
+        
+        // Detect current view dan refresh
+        javafx.scene.Node currentNode = contentArea.getChildren().get(0);
+        
+        // Jika Dashboard, refresh dashboard
+        if (currentNode.getUserData() != null && currentNode.getUserData().equals("dashboard")) {
+            switchToDashboard();
+        }
+    }
+    
+    /**
+     * Show notification ketika achievement unlocked
+     */
+    private void showAchievementNotification(Achievement achievement) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("🏆 Achievement Unlocked!");
+        alert.setHeaderText(achievement.getName());
+        alert.setContentText(achievement.getDescription() + "\n\n+" + achievement.getXpReward() + " XP!");
+        
+        // Custom styling untuk alert
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setStyle("-fx-background-color: #1e1e2e;");
+        
+        alert.showAndWait();
     }
 
-    // method untuk membuat header - private untuk internal use saja
+    /**
+     * Switch ke Dashboard view
+     */
+    private void switchToDashboard() {
+        contentArea.getChildren().clear();
+        DashboardView dashboardView = new DashboardView(taskManager, userProfile);
+        BorderPane dashPane = dashboardView.getView();
+        dashPane.setUserData("dashboard"); // Mark sebagai dashboard
+        contentArea.getChildren().add(dashPane);
+        updateSelectedButton(sidebar, (Button) sidebar.getChildren().get(0));
+    }
+
     private HBox createHeader() {
         HBox header = new HBox(20);
         header.setPadding(new Insets(15, 20, 15, 20));
@@ -88,24 +177,23 @@ public class StudyPlannerApp extends Application {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        Label userInfo = new Label("Level " + userProfile.getLevel() + " • " + userProfile.getXP() + " XP");
-        userInfo.setStyle("-fx-font-size: 14px; -fx-text-fill: #a6adc8;");
+        // ⭐ Simpan reference ke userInfoLabel
+        userInfoLabel = new Label("Level " + userProfile.getLevel() + " • " + userProfile.getXP() + " XP");
+        userInfoLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #a6adc8;");
 
         Button settingsBtn = new Button("⚙");
         settingsBtn.setStyle("-fx-background-color: #313244; -fx-text-fill: #cdd6f4; -fx-font-size: 18px;");
 
-        header.getChildren().addAll(title, spacer, userInfo, settingsBtn);
+        header.getChildren().addAll(title, spacer, userInfoLabel, settingsBtn);
         return header;
     }
 
-    // method untuk membuat sidebar navigasi
     private VBox createSidebar() {
         VBox sidebar = new VBox(10);
         sidebar.setPadding(new Insets(20));
         sidebar.setPrefWidth(220);
         sidebar.setStyle("-fx-background-color: #181825; -fx-border-color: #313244; -fx-border-width: 0 1 0 0;");
 
-        // true = tombol terpilih, false = tidak
         Button dashboardBtn = createNavButton("📊 Dashboard", true);
         Button tasksBtn = createNavButton("✓ Tasks", false);
         Button calendarBtn = createNavButton("📅 Calendar", false);
@@ -123,14 +211,12 @@ public class StudyPlannerApp extends Application {
         return sidebar;
     }
 
-    // method untuk membuat tombol navigasi
     private Button createNavButton(String text, boolean selected) {
         Button btn = new Button(text);
         btn.setPrefWidth(180);
         btn.setPrefHeight(45);
         btn.setAlignment(Pos.CENTER_LEFT);
 
-        // Styling berdasarkan status terpilih atau tidak
         if (selected) {
             btn.setStyle(
                     "-fx-background-color: #89b4fa; -fx-text-fill: #1e1e2e; -fx-font-size: 14px; -fx-font-weight: bold;");
@@ -146,7 +232,6 @@ public class StudyPlannerApp extends Application {
     }
 
     private void setupNavigation(VBox sidebar, StackPane contentArea) {
-        // Get buttons (tombol) dari sidebar
         Button dashboardBtn = (Button) sidebar.getChildren().get(0);
         Button tasksBtn = (Button) sidebar.getChildren().get(1);
         Button calendarBtn = (Button) sidebar.getChildren().get(2);
@@ -154,16 +239,13 @@ public class StudyPlannerApp extends Application {
         Button flashcardsBtn = (Button) sidebar.getChildren().get(4);
         Button analyticsBtn = (Button) sidebar.getChildren().get(5);
 
-        // Setup click handlers = mengarahkan ke view yang sesuai
         dashboardBtn.setOnAction(e -> {
-            contentArea.getChildren().clear();
-            contentArea.getChildren().add(new DashboardView(taskManager, userProfile).getView());
-            updateSelectedButton(sidebar, dashboardBtn);
+            switchToDashboard();
         });
 
         tasksBtn.setOnAction(e -> {
             contentArea.getChildren().clear();
-            contentArea.getChildren().add(new TasksView(taskManager).getView());
+            contentArea.getChildren().add(new TasksView(taskManager, controller).getView());
             updateSelectedButton(sidebar, tasksBtn);
         });
 
@@ -192,7 +274,6 @@ public class StudyPlannerApp extends Application {
         });
     }
 
-    // method untuk mengupdate styling tombol terpilih di sidebar
     private void updateSelectedButton(VBox sidebar, Button selectedBtn) {
         for (int i = 0; i < 6; i++) {
             Button btn = (Button) sidebar.getChildren().get(i);
@@ -205,9 +286,7 @@ public class StudyPlannerApp extends Application {
         }
     }
 
-    // method untuk load sample data
     private void loadSampleData() {
-        // Add some sample tasks
         taskManager.addTask(new Assignment("Metnum Problem Set", "Complete 2 & 3 stage",
                 java.time.LocalDateTime.now().plusDays(3), 2, TaskPriority.HIGH));
 
@@ -218,8 +297,8 @@ public class StudyPlannerApp extends Application {
                 java.time.LocalDateTime.now().plusDays(14), 10, TaskPriority.MEDIUM));
     }
 
-    // main method
     public static void main(String[] args) {
         launch(args);
     }
 }
+

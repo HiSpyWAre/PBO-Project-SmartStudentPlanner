@@ -3,13 +3,13 @@ package model;
 import java.time.LocalDateTime;
 
 public class Assignment extends Task {
+    // encapsulation: private attribute n public method
     private String subject;
     private boolean hasAutoGrading;
     
     // constructor untuk Assignment
-    public Assignment(String title, String description, LocalDateTime dueDate, 
-                     int estimatedHours, TaskPriority priority) {
-        super(title, description, dueDate, estimatedHours, priority);
+    public Assignment(String title, String description, LocalDateTime dueDate, int estimatedHours, TaskPriority priority) {
+        super(title, description, dueDate, estimatedHours, priority); // super memanggil constructor superclass (Task)
         this.subject = "";
         this.hasAutoGrading = false;
     }

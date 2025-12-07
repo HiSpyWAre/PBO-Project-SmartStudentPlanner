@@ -13,6 +13,7 @@ public class UserProfile {
     private LocalDate lastActivityDate;
     private Map<LocalDate, Integer> productivityHistory;
     private List<Achievement> achievements;
+    private List<ProfileObserver> observers;
     private List<Integer> pomodoroHistory;
     private Map<String, Double> subjectTimeDistribution;
     
@@ -26,9 +27,9 @@ public class UserProfile {
         this.achievements = new ArrayList<>();
         this.pomodoroHistory = new ArrayList<>();
         this.subjectTimeDistribution = new HashMap<>();
-        
+        this.observers = new ArrayList<>(); // ← TAMBAH INI
         initializeAchievements();
-    }
+        }
     
     // inisialisasi daftar achievement dan kondisinya
     private void initializeAchievements() {
@@ -41,11 +42,51 @@ public class UserProfile {
         achievements.add(new Achievement("Master", "Reach level 10", 500, false));
     }
     
+        // Tambah method-method ini di akhir class (sebelum closing brace)
+    public void addObserver(ProfileObserver observer) {
+        if (!observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+
+    public void removeObserver(ProfileObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notifyXPChanged() {
+        for (ProfileObserver observer : observers) {
+            observer.onXPChanged(xp, level);
+        }
+    }
+
+    private void notifyStreakChanged() {
+        for (ProfileObserver observer : observers) {
+            observer.onStreakChanged(streak);
+        }
+    }
+
+    private void notifyAchievementUnlocked(Achievement achievement) {
+        for (ProfileObserver observer : observers) {
+            observer.onAchievementUnlocked(achievement);
+        }
+    }
+
+    private void notifyProductivityRecorded(int minutes) {
+        for (ProfileObserver observer : observers) {
+            observer.onProductivityRecorded(minutes);
+        }
+    }
     // menambahkan XP dan mengecek level up
     public void addXP(int amount) {
+        System.out.println("🎮 Adding XP: " + amount);
+        System.out.println("   Before: Level " + level + ", XP " + xp);
+    
         xp += amount;
         checkLevelUp();
         checkAchievements();
+        notifyXPChanged();
+
+        System.out.println("   After: Level " + level + ", XP " + xp);
     }
     
     // mengecek dan menangani level up
@@ -69,6 +110,7 @@ public class UserProfile {
         }
         
         lastActivityDate = today;
+        notifyStreakChanged();
         checkAchievements();
     }
     
@@ -77,6 +119,7 @@ public class UserProfile {
         LocalDate today = LocalDate.now();
         productivityHistory.merge(today, minutesStudied, Integer::sum);
         updateStreak();
+        notifyProductivityRecorded(minutesStudied);
     }
     
     // merekam sesi pomodoro

@@ -7,8 +7,7 @@ public class Project extends Task {
     private List<Task> subtasks;
     private LocalDateTime startDate;
     
-    public Project(String title, String description, LocalDateTime dueDate, 
-                   int estimatedHours, TaskPriority priority) {
+    public Project(String title, String description, LocalDateTime dueDate, int estimatedHours, TaskPriority priority) {
         super(title, description, dueDate, estimatedHours, priority);
         this.subtasks = new ArrayList<>();
         this.startDate = LocalDateTime.now();

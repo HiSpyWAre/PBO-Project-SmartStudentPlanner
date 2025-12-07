@@ -31,7 +31,7 @@ public class Exam extends Task {
     }
     
     public double getPreparednessPercentage() {
-        return Math.min(100.0, (double)studyHoursCompleted / estimatedHours * 100.0);
+        return Math.min(100.0, (double)studyHoursCompleted / estimatedHours * 100.0); //method untuk mendapatkan persentase kesiapan ujian
     }
     
     public List<String> getTopics() { 

@@ -5,7 +5,7 @@ import java.util.*;
 
 // Abstract base class untuk semua jenis tugas
 public abstract class Task {
-    // idCounter untuk generate unique IDs
+    // idCounter untuk generate unique IDs : setiap tugas punya identifier beda
     private static int idCounter = 0;
     
     // menggunakan protected agar variabel bisa diakses oleh subclass
@@ -18,11 +18,10 @@ public abstract class Task {
     protected TaskPriority priority;
     protected int estimatedHours;
     protected int actualHours;
-    protected List<String> tags; // 
-    protected List<Task> dependencies; // tugas yang harus diselesaikan sebelum tugas ini bisa dimulai
+    protected List<String> tags; // label/kategori untuk tugas
+    protected List<Task> dependencies; // tugas yang harus diselesaikan sebelum tugas lain bisa dimulai
     
-    public Task(String title, String description, LocalDateTime dueDate, 
-                int estimatedHours, TaskPriority priority) {
+    public Task(String title, String description, LocalDateTime dueDate, int estimatedHours, TaskPriority priority) {
         this.id = ++idCounter;
         this.title = title;
         this.description = description;
@@ -45,7 +44,7 @@ public abstract class Task {
         this.status = TaskStatus.COMPLETED;
     }
     
-    // method untuk menambahkan tag
+    // method untuk menambahkan tag, Nb: depedencies tdk diimplementasi di UI
     public void addDependency(Task task) {
         dependencies.add(task);
     }

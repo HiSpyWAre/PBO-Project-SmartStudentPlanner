@@ -18,7 +18,7 @@ public class FlashcardsView {
         loadSampleDecks(); // buat demo
         buildView();
     }
-    
+    // method untuk membangun tampilan utama
     private void buildView() {
         mainContent = new VBox(20);
         mainContent.setPadding(new Insets(30));
@@ -41,6 +41,7 @@ public class FlashcardsView {
         view.setCenter(scroll);
     }
     
+    // method untuk membuat header
     private HBox createHeader() {
         HBox header = new HBox(20);
         header.setAlignment(Pos.CENTER_LEFT);
@@ -60,6 +61,7 @@ public class FlashcardsView {
         return header;
     }
     
+    // method untuk membuat row statistik
     private HBox createStatsRow() {
         HBox stats = new HBox(20);
         stats.setAlignment(Pos.CENTER);
@@ -75,6 +77,7 @@ public class FlashcardsView {
         return stats;
     }
     
+    // method untuk membuat card statistik individual
     private VBox createStatCard(String label, String value, String color) {
         VBox card = new VBox(10);
         card.setPadding(new Insets(20));
@@ -92,6 +95,7 @@ public class FlashcardsView {
         return card;
     }
     
+    // method untuk membuat grid deck
     private GridPane createDecksGrid() {
         GridPane grid = new GridPane();
         grid.setHgap(20);
@@ -102,12 +106,13 @@ public class FlashcardsView {
         int col = 0;
         int row = 0;
         
+        // looping setiap deck
         for (model.Deck deck : decks) {
             VBox deckCard = createDeckCard(deck);
             grid.add(deckCard, col, row);
             
             col++;
-            if (col > 2) {
+            if (col > 2) { // 3 kolom per baris
                 col = 0;
                 row++;
             }
@@ -116,6 +121,7 @@ public class FlashcardsView {
         return grid;
     }
     
+    // method untuk membuat card deck individual
     private VBox createDeckCard(model.Deck deck) {
         VBox card = new VBox(15);
         card.setPadding(new Insets(20));
@@ -158,6 +164,7 @@ public class FlashcardsView {
         return card;
     }
     
+    // method untuk memulai sesi belajar
     private void startStudySession(model.Deck deck) {
         List<model.Flashcard> dueCards = deck.getCardsDueForReview();
         
@@ -173,6 +180,7 @@ public class FlashcardsView {
         showStudyMode(deck, dueCards);
     }
     
+    // method untuk menampilkan mode belajar
     private void showStudyMode(model.Deck deck, List<model.Flashcard> cards) {
         Stage studyStage = new Stage();
         studyStage.setTitle("Study: " + deck.getName());
@@ -283,6 +291,7 @@ public class FlashcardsView {
         studyStage.show();
     }
     
+    // method untuk membuat tombol penilaian
     private Button createRatingButton(String text, String color, int quality) {
         Button btn = new Button(text);
         btn.setStyle("-fx-background-color: " + color + "; -fx-text-fill: #1e1e2e; " +
@@ -290,6 +299,7 @@ public class FlashcardsView {
         return btn;
     }
     
+    // method untuk menampilkan dialog pembuatan deck baru
     private void showCreateDeckDialog() {
         Dialog<model.Deck> dialog = new Dialog<>();
         dialog.setTitle("Create New Deck");
@@ -329,6 +339,7 @@ public class FlashcardsView {
         });
     }
     
+    // method untuk menampilkan dialog manajemen kartu
     private void showManageCardsDialog(model.Deck deck) {
         Stage stage = new Stage();
         stage.setTitle("Manage: " + deck.getName());
@@ -353,6 +364,7 @@ public class FlashcardsView {
         stage.show();
     }
     
+    // method untuk menampilkan dialog penambahan kartu baru
     private void showAddCardDialog(model.Deck deck, Stage parentStage) {
         Dialog<model.Flashcard> dialog = new Dialog<>();
         dialog.setTitle("Add New Card");
@@ -373,21 +385,21 @@ public class FlashcardsView {
         answerField.setPromptText("Answer");
         answerField.setPrefRowCount(3);
         
-        TextField hintField = new TextField();
-        hintField.setPromptText("Hint (optional)");
+        // TextField hintField = new TextField();
+        // hintField.setPromptText("Hint (optional)");
         
         grid.add(new Label("Question:"), 0, 0);
         grid.add(questionField, 1, 0);
         grid.add(new Label("Answer:"), 0, 1);
         grid.add(answerField, 1, 1);
-        grid.add(new Label("Hint:"), 0, 2);
-        grid.add(hintField, 1, 2);
+        // grid.add(new Label("Hint:"), 0, 2);
+        // grid.add(hintField, 1, 2);
         
         dialog.getDialogPane().setContent(grid);
         
         dialog.setResultConverter(btn -> {
             if (btn == addBtn && !questionField.getText().isEmpty() && !answerField.getText().isEmpty()) {
-                return new model.Flashcard(questionField.getText(), answerField.getText(), hintField.getText());
+                return new model.Flashcard(questionField.getText(), answerField.getText());
             }
             return null;
         });
@@ -399,6 +411,7 @@ public class FlashcardsView {
         });
     }
     
+    // method untuk memuat deck sampel
     private void loadSampleDecks() {
         // Sample deck 1: Java Programming
         model.Deck javaDeck = new model.Deck("Java Programming", "Core Java concepts and syntax");

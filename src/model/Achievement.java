@@ -10,7 +10,7 @@ public class Achievement {
     private boolean unlocked;
     private LocalDateTime unlockedDate;
     
-    // cnstructor achievement mempunyai argumen:
+    // constructor achievement mempunyai argumen:
     public Achievement(String name, String description, int xpReward, boolean unlocked) {
         this.name = name;
         this.description = description;
@@ -22,8 +22,7 @@ public class Achievement {
         // Cek kondisi spesifik berdasarkan nama achievement
         return switch (name) {
             case "First Steps" -> {
-            // Check if any task completed (need TaskManager reference)
-                yield false; // Will be checked in MainController
+                yield false; // Akan di cek di MainController
             }
 
             case "Dedicated" -> profile.getStreak() >= 7;
@@ -34,7 +33,6 @@ public class Achievement {
         };
     }
     
-    // method untuk unlock achievement
     public void unlock() {
         this.unlocked = true;
         this.unlockedDate = LocalDateTime.now();

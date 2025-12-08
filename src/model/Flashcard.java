@@ -6,14 +6,14 @@ public class Flashcard {
     private int id;
     private String question;
     private String answer;
-    private String hint;
-    private int easeFactor; // 0-5 (how easy the card is)
-    private int repetitions; // number of successful reviews
-    private int interval; // days until next review
+    // private String hint;
+    private int easeFactor; 
+    private int repetitions; 
+    private int interval; 
     private LocalDateTime nextReview;
     private LocalDateTime createdDate;
     private LocalDateTime lastReviewed;
-    private int totalReviews;
+    private int totalReviews;zz
     private int correctCount;
     
     private static int idCounter = 0;
@@ -22,8 +22,8 @@ public class Flashcard {
         this.id = ++idCounter;
         this.question = question;
         this.answer = answer;
-        this.hint = "";
-        this.easeFactor = 2500; // Default ease factor (2.5 * 1000)
+        // this.hint = "";
+        this.easeFactor = 2500; 
         this.repetitions = 0;
         this.interval = 0;
         this.nextReview = LocalDateTime.now();
@@ -34,22 +34,21 @@ public class Flashcard {
     
     public Flashcard(String question, String answer, String hint) {
         this(question, answer);
-        this.hint = hint;
+        // this.hint = hint;
     }
     
-    // SM-2 Spaced Repetition Algorithm
     public void recordReview(int quality) {
-        // quality: 0-5 where 5=perfect, 0=total blackout
         totalReviews++;
         
-        if (quality >= 3) {
+        if (quality >= 3) { // jika jawaban benar
             correctCount++;
             
-            if (repetitions == 0) {
+            if (repetitions == 0) {// first successful review = 1 day
                 interval = 1;
-            } else if (repetitions == 1) {
+            } else if (repetitions == 1) { // second successful review = 6 days
                 interval = 6;
             } else {
+                // untuk review selanjutnya = earlier interval * ease factor
                 interval = (int) Math.round(interval * (easeFactor / 1000.0));
             }
             
@@ -100,12 +99,12 @@ public class Flashcard {
     public void setAnswer(String answer) { 
         this.answer = answer; 
     }
-    public String getHint() { 
-        return hint; 
-    }
-    public void setHint(String hint) { 
-        this.hint = hint; 
-    }
+    // public String getHint() { 
+    //     return hint; 
+    // }
+    // public void setHint(String hint) { 
+    //     this.hint = hint; 
+    // }
     public int getRepetitions() { 
         return repetitions; 
     }

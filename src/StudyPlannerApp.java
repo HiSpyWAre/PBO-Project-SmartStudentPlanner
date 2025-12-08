@@ -70,7 +70,6 @@ public class StudyPlannerApp extends Application {
         // Load sample data
         loadSampleData();
         
-        // ⭐ REGISTER OBSERVER untuk real-time updates
         setupProfileObserver();
     }
     
@@ -177,7 +176,6 @@ public class StudyPlannerApp extends Application {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // ⭐ Simpan reference ke userInfoLabel
         userInfoLabel = new Label("Level " + userProfile.getLevel() + " • " + userProfile.getXP() + " XP");
         userInfoLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #a6adc8;");
 
@@ -199,14 +197,14 @@ public class StudyPlannerApp extends Application {
         Button calendarBtn = createNavButton("📅 Calendar", false);
         Button pomodoroBtn = createNavButton("⏱ Pomodoro", false);
         Button flashcardsBtn = createNavButton("🎴 Flashcards", false);
-        Button analyticsBtn = createNavButton("📈 Analytics", false);
+        // Button analyticsBtn = createNavButton("📈 Analytics", false);
 
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
 
         sidebar.getChildren().addAll(
                 dashboardBtn, tasksBtn, calendarBtn,
-                pomodoroBtn, flashcardsBtn, analyticsBtn, spacer);
+                pomodoroBtn, flashcardsBtn, spacer);
 
         return sidebar;
     }
@@ -237,7 +235,7 @@ public class StudyPlannerApp extends Application {
         Button calendarBtn = (Button) sidebar.getChildren().get(2);
         Button pomodoroBtn = (Button) sidebar.getChildren().get(3);
         Button flashcardsBtn = (Button) sidebar.getChildren().get(4);
-        Button analyticsBtn = (Button) sidebar.getChildren().get(5);
+        // Button analyticsBtn = (Button) sidebar.getChildren().get(5);
 
         dashboardBtn.setOnAction(e -> {
             switchToDashboard();
@@ -267,15 +265,15 @@ public class StudyPlannerApp extends Application {
             updateSelectedButton(sidebar, flashcardsBtn);
         });
 
-        analyticsBtn.setOnAction(e -> {
-            contentArea.getChildren().clear();
-            contentArea.getChildren().add(new AnalyticsView(taskManager, userProfile).getView());
-            updateSelectedButton(sidebar, analyticsBtn);
-        });
+        // analyticsBtn.setOnAction(e -> {
+        //     contentArea.getChildren().clear();
+        //     contentArea.getChildren().add(new AnalyticsView(taskManager, userProfile).getView());
+        //     updateSelectedButton(sidebar, analyticsBtn);
+        // });
     }
 
     private void updateSelectedButton(VBox sidebar, Button selectedBtn) {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             Button btn = (Button) sidebar.getChildren().get(i);
             if (btn == selectedBtn) {
                 btn.setStyle(

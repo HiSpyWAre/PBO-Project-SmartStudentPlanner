@@ -6,13 +6,11 @@ import java.util.List;
 import model.*;
 import model.Task;
 
-// Smart Scheduler - menghasilkan jadwal belajar cerdas berdasarkan tugas dan profil pengguna
 class SmartScheduler {
-    // private atribut untuk mengakses data tugas dan profil pengguna
     private TaskManager taskManager;
     private UserProfile userProfile;
     
-    // konstruktor untuk inisialisasi atribut
+    // inisialisasi atribut
     public SmartScheduler(TaskManager taskManager, UserProfile userProfile) {
         this.taskManager = taskManager;
         this.userProfile = userProfile;
@@ -26,12 +24,10 @@ class SmartScheduler {
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime endTime = currentTime.plusDays(days);
         
-        // Simple algoritma greedy untk penjadwalan
         for (Task task : pendingTasks) {
             if (task.getStatus() == TaskStatus.COMPLETED) continue;
             if (!task.canStart()) continue; // Check dependencies
             
-            // 
             int hoursNeeded = task.getEstimatedHours() - task.getActualHours();
             
             // penjadwalan dalam blok 2 jam selama jam optimal (9 pagi - 9 malam)

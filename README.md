@@ -269,10 +269,11 @@ Setiap jenis tugas menghitung urgensi secara berbeda:
 - SM-2 algorithm by Piotr Wozniak
 - JavaFX community for excellent documentation
 
+<!--
 ## 📧 Contact
 
 Nayyara - [@yourhandle](https://twitter.com/yourhandle)
 
-Project Link: [https://github.com/HiSpyWare/smart-study-planner](https://github.com/HiSpyWare/smart-study-planner)
+Project Link: [https://github.com/HiSpyWare/smart-study-planner](https://github.com/HiSpyWare/smart-study-planner)-->
 
 ---

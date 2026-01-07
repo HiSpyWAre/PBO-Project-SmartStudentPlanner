@@ -75,13 +75,13 @@ Aplikasi desktop komprehensif berbasis GUI JavaFX untuk mengelola tugas akademik
     Bonus waktu (50 XP untuk penyelesaian tepat waktu)
     Bonus kesulitan (5 XP per perkiraan jam)
 - **Sistem Pencapaian** : Buka pencapaian untuk setiap tonggak penting
-  -🏆 Langkah Pertama: Selesaikan tugas pertama Anda
-  -🔥 Berdedikasi: Pertahankan rentetan 7 hari
-  -💪 Pelari Maraton: Selesaikan sesi belajar selama 10 jam
-  -⏰ Bangun Pagi: Belajar sebelum jam 7 pagi
-  -🌙 Burung Hantu Malam: Belajar hingga lewat tengah malam
-  -🎯 Perfeksionis: Selesaikan 10 tugas tepat waktu
-  -👑 Master: Capai level 10
+  Langkah Pertama: Selesaikan tugas pertama Anda
+  🔥 Berdedikasi: Pertahankan rentetan 7 hari<br>
+  💪 Pelari Maraton: Selesaikan sesi belajar selama 10 jam<br>
+  ⏰ Bangun Pagi: Belajar sebelum jam 7 pagi<br>
+  🌙 Burung Hantu Malam: Belajar hingga lewat tengah malam<br>
+  🎯 Perfeksionis: Selesaikan 10 tugas tepat waktu<br>
+  👑 Master: Capai level 10<br>
 - **Pelacakan Rentetan Belajar** : Penghitung Rentetan Belajar Harian
   
 ## 🏗️ Architecture (Pola Desain yang Digunakan)

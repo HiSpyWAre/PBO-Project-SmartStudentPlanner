@@ -58,31 +58,47 @@ Aplikasi desktop komprehensif berbasis GUI JavaFX untuk mengelola tugas akademik
 - 4-level rating system (Again, Hard, Good, Easy): dapat dipilih oleh pengguna setiap jawaban ditampilkan dan menilai secara sederhana level penguasaan materi 
 <img width="1591" height="1057" alt="image" src="https://github.com/user-attachments/assets/3895d742-c98e-41c4-8838-595504c05b96" />
 
-### 🎯 Sistem Gamifikasi
+## 🎯 Sistem Gamifikasi
 - **XP & Naik Level** : Dapatkan poin pengalaman dengan menyelesaikan tugas.
 - **Perhitungan XP Dinamis** :
+  Rumus perhitungan detail:
+  ```
+  Total XP = Base (50) 
+         + Priority Bonus (0-75)
+         + Type Bonus (Assignment:50, Project:75, Exam:100)
+         + Time Bonus (50 if on time)
+         + Difficulty Bonus (Estimated Hours × 5)
+  ```
     XP Dasar (50)
     Bonus prioritas (0-75 XP)
     Bonus berdasarkan jenis tugas (Ujian: 100, Proyek: 75, Tugas: 50)
     Bonus waktu (50 XP untuk penyelesaian tepat waktu)
     Bonus kesulitan (5 XP per perkiraan jam)
 - **Sistem Pencapaian** : Buka pencapaian untuk setiap tonggak penting
-    🏆 Langkah Pertama: Selesaikan tugas pertama Anda
-    🔥 Berdedikasi: Pertahankan rentetan 7 hari
-    💪 Pelari Maraton: Selesaikan sesi belajar selama 10 jam
-    ⏰ Bangun Pagi: Belajar sebelum jam 7 pagi
-    🌙 Burung Hantu Malam: Belajar hingga lewat tengah malam
-    🎯 Perfeksionis: Selesaikan 10 tugas tepat waktu
-    👑 Master: Capai level 10
+    -🏆 Langkah Pertama: Selesaikan tugas pertama Anda
+    -🔥 Berdedikasi: Pertahankan rentetan 7 hari
+    -💪 Pelari Maraton: Selesaikan sesi belajar selama 10 jam
+    -⏰ Bangun Pagi: Belajar sebelum jam 7 pagi
+    -🌙 Burung Hantu Malam: Belajar hingga lewat tengah malam
+    -🎯 Perfeksionis: Selesaikan 10 tugas tepat waktu
+    -👑 Master: Capai level 10
 - **Pelacakan Rentetan Belajar** : Penghitung Rentetan Belajar Harian
   
-## 🏗️ Architecture
+## 🏗️ Architecture (Pola Desain yang Digunakan)
 
-### Design Patterns
-- **MVC (Model-View-Controller)**: Pemisahan concern yang jelas
-- **Observer Pattern**: Update UI real-time
+### 1. Design Patterns
+- **MVC (Model-View-Controller)**: Model(Task, UserProfile, Achievement, Flashcard, dll), View(DashboardView, TasksView, PomodoroView, dll), Controller(MainController, dll).
+- **Observer Pattern**: Pembaruan UI secara real-time 
 - **Factory Pattern**: Pembuatan tugas
-- **Strategy Pattern**: Kalkulasi urgensi yang berbeda per jenis tugas
+- **Strategy Pattern**: Kalkulasi urgensi yang berbeda per jenis tugas, penerapan polymorphism melalui inheritance
+- **Singleton Pattern**: Memastikan koneksi basis data tunggal (DatabaseManager.java)
+- **Data Access Object (DAO)**: UserDAO(Operasi pada profil pengguna), TaskDAO(Operasi CRUD tugas), FlashcardDAO(Operasi kartu flash dan deck)
+
+### 2. Prinsip inti PBO
+- **Encapsulation**: Private fields with public getters/setters
+- **Inheritance**: Task → Assignment/Exam/Project
+- **Polymorphism**: Abstract calculateUrgencyScore() method
+- **Abstraction**: Abstract Task class with concrete implementations
 
 ## 💾 Penyimpanan Permanen
 
@@ -90,7 +106,16 @@ Aplikasi desktop komprehensif berbasis GUI JavaFX untuk mengelola tugas akademik
 - **Ketahanan Data Lintas Sesi** : Data tetap ada meskipun aplikasi dimulai ulang.
 - **Pencadangan Otomatis** : Fitur pencadangan basis data yang mudah.
 - **Integritas Data** : Kepatuhan ACID memastikan tidak ada kehilangan data.
-
+### Skema
+```
+- users (id, username, xp, level, streak, last_activity_date)
+- tasks (id, user_id, title, description, task_type, due_date, status, priority, estimated_hours, actual_hours)
+- achievements (id, user_id, name, description, xp_reward, unlocked, unlocked_date)
+- productivity_history (id, user_id, date, minutes)
+- pomodoro_sessions (id, user_id, start_time, end_time, duration, completed)
+- decks (id, user_id, name, description, category, created_date)
+- flashcards (id, deck_id, question, answer, ease_factor, repetitions, interval, next_review)
+```
 ## 🎨 Antarmuka Pengguna
 
 - **Tema Gelap Modern** : Skema warna Catppuccin Mocha

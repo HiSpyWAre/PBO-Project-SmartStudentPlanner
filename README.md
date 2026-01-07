@@ -5,8 +5,8 @@ Aplikasi produktivitas berbasis GUI JavaFX yang komprehensif dirancang untuk mem
 ![Java](https://img.shields.io/badge/Java-17+-orange.svg)
 ![JavaFX](https://img.shields.io/badge/JavaFX-17.0.2-blue.svg)
 ![SQLite](https://img.shields.io/badge/SQLite-3.45-green.svg)
-![Stars](https://img.shields.io/github/stars/nayyaraazra/smart-study-planner)
-![Issues](https://img.shields.io/github/issues/nayyaraazra/smart-study-planner)
+![Stars](https://img.shields.io/github/stars/nayyaraazra/PBO-Project-SmartStudentPlanner)
+![Issues](https://img.shields.io/github/issues/nayyaraazra/PBO-Project-SmartStudentPlanner)
 
 ## ✨ Features
 

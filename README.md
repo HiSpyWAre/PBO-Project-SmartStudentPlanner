@@ -74,8 +74,8 @@ Aplikasi desktop komprehensif berbasis GUI JavaFX untuk mengelola tugas akademik
     Bonus berdasarkan jenis tugas (Ujian: 100, Proyek: 75, Tugas: 50)
     Bonus waktu (50 XP untuk penyelesaian tepat waktu)
     Bonus kesulitan (5 XP per perkiraan jam)
-- **Sistem Pencapaian** : Buka pencapaian untuk setiap tonggak penting
-  Langkah Pertama: Selesaikan tugas pertama Anda
+- **Sistem Pencapaian** : Buka pencapaian untuk setiap tonggak penting<br>
+  Langkah Pertama: Selesaikan tugas pertama Anda<br>
   🔥 Berdedikasi: Pertahankan rentetan 7 hari<br>
   💪 Pelari Maraton: Selesaikan sesi belajar selama 10 jam<br>
   ⏰ Bangun Pagi: Belajar sebelum jam 7 pagi<br>
@@ -126,25 +126,44 @@ Aplikasi desktop komprehensif berbasis GUI JavaFX untuk mengelola tugas akademik
 
 ### Project Structure
 ```
-SmartStudyPlanner/
+smart-study-planner/
 ├── src/
-│   ├── model/              # Model data and logika
-│   │   ├── Task.java
-│   │   ├── TaskManager.java
-│   │   ├── UserProfile.java
-│   │   ├── Flashcard.java
-│   │   └── ...
-│   ├── ui/                 # Tampilan User interface 
-│   │   ├── DashboardView.java
-│   │   ├── TasksView.java
-│   │   ├── PomodoroView.java
-│   │   └── ...
-│   ├── controller/         # Controllers aplikasi
-│   │   ├── MainController.java
-│   │   └── SmartScheduler.java
-│   ├── resources/          # CSS dan assets
-│   │   └── styles.css
-│   └── StudyPlannerApp.java
+│   ├── StudyPlannerApp.java          # Main application entry point
+│   ├── controller/
+│   │   ├── MainController.java       # Business logic controller
+│   │   └── SmartScheduler.java       # Task scheduling algorithm
+│   ├── model/
+│   │   ├── Task.java                 # Abstract task class
+│   │   ├── Assignment.java           # Assignment implementation
+│   │   ├── Exam.java                 # Exam implementation
+│   │   ├── Project.java              # Project implementation
+│   │   ├── TaskManager.java          # Task collection manager
+│   │   ├── TaskObserver.java         # Observer interface
+│   │   ├── TaskStatus.java           # Task status enum
+│   │   ├── TaskPriority.java         # Priority enum
+│   │   ├── UserProfile.java          # User data model
+│   │   ├── ProfileObserver.java      # Profile observer interface
+│   │   ├── Achievement.java          # Achievement model
+│   │   ├── Flashcard.java            # Flashcard model
+│   │   ├── Deck.java                 # Flashcard deck
+│   │   ├── DeckManager.java          # Deck collection manager
+│   │   ├── PomodoroSession.java      # Pomodoro session model
+│   │   └── StudyStatistics.java      # Statistics calculator
+│   ├── database/
+│   │   ├── DatabaseManager.java      # SQLite connection manager
+│   │   ├── UserDAO.java              # User database operations
+│   │   ├── TaskDAO.java              # Task database operations
+│   │   └── FlashcardDAO.java         # Flashcard database operations
+│   ├── ui/
+│   │   ├── DashboardView.java        # Main dashboard
+│   │   ├── TasksView.java            # Task management view
+│   │   ├── CalendarView.java         # Calendar view
+│   │   ├── PomodoroView.java         # Pomodoro timer
+│   │   ├── FlashcardsView.java       # Flashcard study mode
+│   │   └── AnalyticsView.java        # Statistics and charts
+└── lib/
+│   └── sqlite-jdbc-3.45.0.0.jar      # SQLite JDBC driver
+│   └── javafx lib
 └── README.md
 ```
 

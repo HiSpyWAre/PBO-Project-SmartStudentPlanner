@@ -9,9 +9,7 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
 import model.*;
 
-/**
- * PomodoroView dengan timer persisten dan UI yang update real-time
- */
+
 public class PomodoroView {
     private BorderPane view;
     private UserProfile userProfile;
@@ -391,9 +389,7 @@ public class PomodoroView {
         }
     }
 
-    /**
-     * ⭐ Update button state
-     */
+    
     private void updateButtonState() {
         if (startPauseBtn != null) {
             if (isRunning) {

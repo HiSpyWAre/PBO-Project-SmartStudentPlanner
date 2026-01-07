@@ -77,7 +77,3 @@ public class TaskManager {
     }
 }
 
-// Observer interface for task changes
-interface TaskObserver {
-    void onTasksChanged();
-}

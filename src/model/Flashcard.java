@@ -13,7 +13,7 @@ public class Flashcard {
     private LocalDateTime nextReview;
     private LocalDateTime createdDate;
     private LocalDateTime lastReviewed;
-    private int totalReviews;zz
+    private int totalReviews;
     private int correctCount;
     
     private static int idCounter = 0;

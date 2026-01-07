@@ -7,26 +7,30 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.*;
 import model.*;
 import controller.MainController;
+import database.TaskDAO;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class TasksView {
+/**
+ * TasksViewWithDB - TasksView dengan database integration
+ * Setiap operasi (add, edit, delete, complete) langsung disimpan ke database
+ */
+public class TasksViewWithDB {
     private BorderPane view;
     private TaskManager taskManager;
     private MainController controller;
+    private TaskDAO taskDAO;
+    private int currentUserId;
     private TableView<Task> taskTable;
     private ObservableList<Task> taskData;
     
-    // method overloading 1
-    public TasksView(TaskManager taskManager) {
-        this(taskManager, null);
-    }
-    
-    // method overloading 2
-    public TasksView(TaskManager taskManager, MainController controller) {
+    public TasksViewWithDB(TaskManager taskManager, MainController controller, 
+                          TaskDAO taskDAO, int currentUserId) {
         this.taskManager = taskManager;
         this.controller = controller;
+        this.taskDAO = taskDAO;
+        this.currentUserId = currentUserId;
         this.view = new BorderPane();
         this.taskData = FXCollections.observableArrayList(taskManager.getAllTasks());
         buildView();
@@ -50,8 +54,9 @@ public class TasksView {
         HBox header = new HBox(20);
         header.setAlignment(Pos.CENTER_LEFT);
         
-        Label title = new Label("📋 All Tasks");
+        Label title = new Label("📋 All Tasks 💾");
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #cdd6f4;");
+        title.setTooltip(new Tooltip("All changes are saved automatically to database"));
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -134,7 +139,7 @@ public class TasksView {
         table.setItems(taskData);
         table.setStyle("-fx-background-color: #313244;");
         
-        // ⭐ CHECKBOX COLUMN dengan XP reward
+        // ⭐ CHECKBOX COLUMN dengan database save
         TableColumn<Task, Boolean> checkCol = new TableColumn<>("");
         checkCol.setPrefWidth(50);
         checkCol.setCellFactory(col -> new TableCell<>() {
@@ -151,17 +156,25 @@ public class TasksView {
                     
                     checkBox.setOnAction(e -> {
                         if (checkBox.isSelected() && task.getStatus() != TaskStatus.COMPLETED) {
-                            // ⭐ USE CONTROLLER untuk complete task (ini akan award XP)
+                            // Complete task (awards XP)
                             if (controller != null) {
                                 controller.completeTask(task);
-                                showXPRewardNotification(task);
                             } else {
                                 task.markComplete();
                                 taskManager.updateTask(task);
                             }
+                            
+                            // ⭐ SAVE TO DATABASE
+                            System.out.println("💾 Saving completed task to database...");
+                            taskDAO.updateTask(task.getId(), task);
+                            
+                            showXPRewardNotification(task);
                         } else if (!checkBox.isSelected()) {
                             task.setStatus(TaskStatus.TODO);
                             taskManager.updateTask(task);
+                            
+                            // ⭐ SAVE TO DATABASE
+                            taskDAO.updateTask(task.getId(), task);
                         }
                         table.refresh();
                     });
@@ -273,8 +286,23 @@ public class TasksView {
                 deleteBtn.setOnAction(e -> {
                     Task task = getTableRow().getItem();
                     if (task != null) {
-                        taskManager.removeTask(task);
-                        taskData.remove(task);
+                        // Confirm deletion
+                        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                        confirm.setTitle("Delete Task");
+                        confirm.setHeaderText("Are you sure?");
+                        confirm.setContentText("Delete task: " + task.getTitle());
+                        
+                        confirm.showAndWait().ifPresent(response -> {
+                            if (response == ButtonType.OK) {
+                                // Remove from manager
+                                taskManager.removeTask(task);
+                                taskData.remove(task);
+                                
+                                // ⭐ DELETE FROM DATABASE
+                                System.out.println("💾 Deleting task from database...");
+                                taskDAO.deleteTask(task.getId());
+                            }
+                        });
                     }
                 });
             }
@@ -291,12 +319,11 @@ public class TasksView {
         return table;
     }
     
-
     private void showXPRewardNotification(Task task) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("✨ Task Completed!");
         alert.setHeaderText("Great job on completing: " + task.getTitle());
-        alert.setContentText("You've earned XP! Check your level in the header.");
+        alert.setContentText("You've earned XP! Check your level in the header.\n\n💾 Progress saved to database.");
         alert.showAndWait();
     }
     
@@ -374,8 +401,14 @@ public class TasksView {
         });
         
         dialog.showAndWait().ifPresent(task -> {
+            // Add to manager
             taskManager.addTask(task);
             taskData.add(task);
+            
+            // ⭐ SAVE TO DATABASE
+            System.out.println("💾 Saving new task to database...");
+            int taskId = taskDAO.saveTask(currentUserId, task);
+            System.out.println("✅ Task saved with ID: " + taskId);
         });
     }
     
@@ -436,6 +469,11 @@ public class TasksView {
         dialog.showAndWait().ifPresent(saved -> {
             if (saved) {
                 taskManager.updateTask(task);
+                
+                // ⭐ SAVE TO DATABASE
+                System.out.println("💾 Updating task in database...");
+                taskDAO.updateTask(task.getId(), task);
+                
                 taskTable.refresh();
             }
         });
@@ -456,4 +494,3 @@ public class TasksView {
         return view;
     }
 }
-

@@ -3,9 +3,6 @@ package controller;
 import model.*;
 import java.util.List;
 
-/**
- * Main Controller dengan proper XP reward system
- */
 public class MainController {
     private TaskManager taskManager;
     private UserProfile userProfile;
@@ -17,7 +14,6 @@ public class MainController {
         this.scheduler = new SmartScheduler(taskManager, userProfile);
     }
     
-    // ====== TASK OPERATIONS ======
     
     public void createTask(Task task) {
         taskManager.addTask(task);
@@ -31,11 +27,9 @@ public class MainController {
         taskManager.removeTask(task);
     }
     
-    /**
-     * Complete task dan berikan XP reward
-     */
+   
     public void completeTask(Task task) {
-        // Cek apakah task sudah completed sebelumnya
+        // melakukan cek apakah task sudah completed sebelumnya
         if (task.getStatus() == TaskStatus.COMPLETED) {
             System.out.println("⚠️ Task already completed!");
             return;
@@ -58,9 +52,7 @@ public class MainController {
         checkPerfectionistAchievement();
     }
     
-    /**
-     * Check "First Steps" achievement (complete 1 task)
-     */
+
     private void checkFirstStepsAchievement() {
         Achievement firstSteps = userProfile.getAchievements().stream()
             .filter(a -> a.getName().equals("First Steps"))
@@ -76,9 +68,6 @@ public class MainController {
         }
     }
     
-    /**
-     * Check "Perfectionist" achievement (complete 10 tasks on time)
-     */
     private void checkPerfectionistAchievement() {
         Achievement perfectionist = userProfile.getAchievements().stream()
             .filter(a -> a.getName().equals("Perfectionist"))
@@ -98,9 +87,6 @@ public class MainController {
         }
     }
     
-    /**
-     * Calculate XP reward berdasarkan task type dan priority
-     */
     private int calculateXPReward(Task task) {
         int baseXP = 50;
         
@@ -139,8 +125,6 @@ public class MainController {
         return totalXP;
     }
     
-    // ====== SCHEDULING OPERATIONS ======
-    
     public List<ScheduledBlock> generateOptimalSchedule(int days) {
         return scheduler.generateSchedule(days);
     }
@@ -148,14 +132,10 @@ public class MainController {
     public List<Task> getRecommendedTasksForNow() {
         return scheduler.getRecommendedTasks(3);
     }
-    
-    // ====== ANALYTICS ======
-    
+
     public StudyStatistics getStatistics() {
         return new StudyStatistics(userProfile, taskManager);
     }
-    
-    // ====== GETTERS ======
     
     public TaskManager getTaskManager() {
         return taskManager;

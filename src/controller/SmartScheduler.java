@@ -10,7 +10,6 @@ class SmartScheduler {
     private TaskManager taskManager;
     private UserProfile userProfile;
     
-    // inisialisasi atribut
     public SmartScheduler(TaskManager taskManager, UserProfile userProfile) {
         this.taskManager = taskManager;
         this.userProfile = userProfile;
@@ -26,7 +25,7 @@ class SmartScheduler {
         
         for (Task task : pendingTasks) {
             if (task.getStatus() == TaskStatus.COMPLETED) continue;
-            if (!task.canStart()) continue; // Check dependencies
+            if (!task.canStart()) continue; 
             
             int hoursNeeded = task.getEstimatedHours() - task.getActualHours();
             
@@ -54,7 +53,7 @@ class SmartScheduler {
     public List<Task> getRecommendedTasks(int count) {
         List<Task> urgentTasks = taskManager.getTasksSortedByUrgency();
         
-        // Filter by what can be started now and is most urgent -> filter berdasarkan tugas yang bisa dimulai sekarang dan paling mendesak
+        // Filter berdasarkan tugas yang bisa dimulai sekarang dan paling mendesak
         return urgentTasks.stream()
             .filter(t -> t.getStatus() != TaskStatus.COMPLETED)
             .filter(Task::canStart)

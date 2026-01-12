@@ -51,7 +51,7 @@ Aplikasi desktop komprehensif berbasis GUI JavaFX untuk mengelola tugas akademik
 <img width="1919" height="1124" alt="image" src="https://github.com/user-attachments/assets/e1786f81-d7fc-4c3b-b65e-9f0cd23319d0" />-->
 
 
-### 🎴 Flashcard System (Coming Soon)
+### 🎴 Flashcard System 
 - Mendukung pemakaian multiple deck
 - Pembelajaran dengan mode interaktif
 - Tracking penguasaan pengguna: Indikator kemajuan untuk setiap kartu dan kartu akan muncul saat waktunya untuk ditinjau.
